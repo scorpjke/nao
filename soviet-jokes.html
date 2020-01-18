@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>
+		Textbook
+	</title>
+	<meta charset="utf-8">
+	<link href="style.css" rel="stylesheet" type="text/css">
+	<script src="js.cookie.js"></script>
+	<script src="comdic.js"></script>
+	<script src="translation.js"></script>
+</head>
+<body onkeydown="handleKeyPress(event)">
+
+
+	<div id="header"></div>
+	<script src="header.js"></script>
+	<div class="main">
+		<h1 id="storyname" class="e"> </h1>
+
+		<div id="under_header" style="padding-left: 20%; padding-right: 20%">
+		<div id="storytext"> </div>
+	</div>
+</body>
+<script>
+	let text =`− meet-each_other SUBJECT dog USA, dog Polish and dog Russian −
+
+dog USA speak: if feel-need-eat/drink, need only do_voice PASSIVE-hear/listen-big and go-and_as_a_result-be_located time CLAUSE begin-have meat
+dog Polish speak: meat be what?
+dog Russian speak: do_voice be what?
+
+−−−−−−−−−
+
+one-male go 綱'kgb for_the_sake speak CLAUSE stop-know-object-be_located parrot self − person-work-綱'kgb do-QUESTION: "because-what cause-tense-dislike me-all? because-what not go group-person-solve-commit_crime?" − male-that back-speak: "me only want you know CLAUSE me not convinced-similar none CLAUSE parrot me speak" −
+
+−−−−−−−−−
+
+− because-what person-綱'kgb time-all go ADVERB-be three-person ? −
+− one able read, one able write, and one convinced-in_danger-and_as_a_result-see/look two o_great-person-prone-understand PASSIVE-in_danger −
+
+−−−−−−−−−
+
+: you-all inside-do what, person-work-with?
+: cause-not_exist place-cause-exist element-wall
+: but me-all need element-wall!
+: because EMPHASIS that me-all inside-cause-not_exist that
+
+−−−−−−−−−
+
+− 綱'stalin go-and_as_a_result-outside-be_located place-cause-big-plant-with-someone/something-have-soul near 綱'leningrad − male-that go-and_as_a_result-outside-be_located one person-cause-big-plant-with-someone/something-have-soul potato − male-that do-QUESTION to person-cause-big-plant-with-someone/something-have-soul −
+
+: person-work-with, you cause-exist potato quantity-what
+: if-think, person-work-with 綱'stalin, if cause-be_located-feel-each_other that all, that-all long-and_as_a_result-in_contact person-cause-all be_located sky
+: but person-cause-all not_exist
+: also potato, person-work-with 綱'stalin, also potato...
+
+`;
+
+	document.getElementById('storyname').innerHTML = unmake_neutral(`LITTLE-story-find_funny 綱'soviet`);
+	document.getElementById('storytext').innerHTML = unmake_neutral(text).replace(/\n/g,'<br>');
+</script>
+</html>

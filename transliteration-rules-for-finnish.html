@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>
+		Nao dictionary
+	</title>
+	<meta charset="utf-8">
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body style="text-align: center; margin-bottom: 100px">
+
+<div id="header"></div>
+<script src="js.cookie.js"></script>
+<script src="header.js"></script>
+<div class="main" style="margin-left: 5%; margin-right: 5%">
+
+<h1 class="e"> Transliteration rules for Finnish</h1>
+
+
+<p> Here are the non-obvious links between Finnish spelling and Nao transliteration:</p>
+<table>
+<tr>
+	<th style="width: 200px"> Finnish </th>
+	<th>　Nao　</th>
+	<th> Example </th>
+
+<tr><td> j </td><td> i </td><td> Julia → 'iulia </td></tr>
+<tr><td> a,ä </td><td> a </td><td> Hämeenlinna → 'hameenlinna </td></tr>
+<tr><td> o,ö </td><td> o </td><td> Närpiö → 'narpio </td></tr>
+<tr><td> y </td><td> y </td><td> Ylöjärvi → 'yloiarvi </td></tr>
+
+</table>
+
+<p>Common Finnish words</p>
+<table>
+<tr>
+	<th> Finnish </th>
+	<th> Nao </th>
+</tr>
+
+<tr><td> Helsinki </td><td> 'helsinki </td></tr>
+<tr><td> Nokia </td><td> 'nokia </td></tr>
+<tr><td> Turku </td><td> 'turku </td></tr>
+<tr><td> Tampere </td><td> 'tampere </td></tr>
+
+
+</table>
+
+</div>
+
+
+<p> Below you can put any Finnish word to see its Nao transliteration <br></p>
+
+<input id="transliteration_input">
+<button id="transliterate_button">Transliterate</button>
+<h2 id="output"></h2>
+
+
+<script>
+
+function transliterate_Finnish_to_Nao(w) {
+	w = w.toLowerCase();
+	let n = ("i a o").split(' ');
+	let r = ("j ä ö").split(' ');
+	for (let i=0; i < r.length; i++) {
+		w = w.split(r[i]).join(n[i]);
+	}
+
+	return "'"+w;
+}
+
+document.getElementById("transliterate_button").addEventListener("click", function(){
+	let w = document.getElementById("transliteration_input").value;
+	document.getElementById("output").innerText = w + " → " + transliterate_Finnish_to_Nao(w);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>
+		Nao dictionary
+	</title>
+	<meta charset="utf-8">
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body style="text-align: center; margin-bottom: 100px">
+
+<div id="header"></div>
+<script src="js.cookie.js"></script>
+<script src="header.js"></script>
+<div class="main" style="margin-left: 5%; margin-right: 5%">
+
+<h1 class="e"> Transliteration rules for Malay (Malaysian/Indonesian)</h1>
+
+
+<p> Here are the non-obvious links between Malay spelling and Nao transliteration:</p>
+<table>
+<tr>
+	<th style="width: 200px"> Malay </th>
+	<th>　Nao　</th>
+	<th> Example </th>
+
+<tr><td> y </td><td> i </td><td> Yogyakarta → 'iogiakarta </td></tr>
+<tr><td> w </td><td> u </td><td> Singkawang → 'singkauang </td></tr>
+<tr><td> c </td><td> tc </td><td> Cimahi → 'tcimahi </td></tr>
+<tr><td> e </td><td> e </td><td> Ternate → 'ternate </td></tr>
+
+
+</table>
+
+<p>Common Malay words</p>
+<table>
+<tr>
+	<th> Malay </th>
+	<th> Nao </th>
+</tr>
+
+<tr><td> Kuala Lumpur </td><td> 'kuala-lumpur </td></tr>
+<tr><td> Jakarta </td><td> 'jakarta </td></tr>
+<tr><td> Java </td><td> 'java </td></tr>
+
+
+
+</table>
+
+</div>
+
+
+<p> Below you can put any Malay word to see its Nao transliteration <br></p>
+
+<input id="transliteration_input">
+<button id="transliterate_button">Transliterate</button>
+<h2 id="output"></h2>
+
+
+<script>
+
+function transliterate_Malay_to_Nao(w) {
+	w = w.toLowerCase();
+	let n = ("i u tc").split(' ');
+	let r = ("y w c").split(' ');
+	for (let i=0; i < r.length; i++) {
+		w = w.split(r[i]).join(n[i]);
+	}
+
+	return "'"+w;
+}
+
+document.getElementById("transliterate_button").addEventListener("click", function(){
+	let w = document.getElementById("transliteration_input").value;
+	document.getElementById("output").innerText = w + " → " + transliterate_Malay_to_Nao(w);
+});
+</script>
+
+</body>
+</html>

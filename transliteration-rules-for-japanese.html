@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>
+		Nao dictionary
+	</title>
+	<meta charset="utf-8">
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body style="text-align: center; margin-bottom: 100px">
+
+<div id="header"></div>
+<script src="js.cookie.js"></script>
+<script src="header.js"></script>
+<div class="main" style="margin-left: 5%; margin-right: 5%">
+
+<h1 class="e"> Transliteration rules for Japanese</h1>
+
+<p> Here are the non-obvious links between the Japanese syllables and Nao transliteration:</p>
+<table>
+<tr>
+	<th> Japanese </th>
+	<th>　Nao　</th>
+	<th> Example </th>
+</tr>
+<tr><td> し、しゃ、しゅ、しょ </td><td> ci, ca, cu, co </td><td> 四国 → <R>し</R>こく → '<R>ci</R>koku </td></tr>
+<tr><td> ち、ちゃ、ちゅ、ちょ </td><td> tci, tca, tcu, tco </td><td> 千葉 → <R>ち</R>ば → '<R>tci</R>ba </td></tr>
+<tr><td> じ、じゃ、じゅ、じょ </td><td> ji, ja, ju, jo </td><td> 富士 → ふ<R>じ</R> → 'fu<R>ji</R> </td></tr>
+<tr><td> ざ、ず、ぞ、ぜ </td><td> za, zu, zo, ze </td><td> 銀座 → ぎん<R>ざ</R> → 'gin<R>za</R> </td></tr>
+<tr><td> ふ、ふぁ、ふぇ、ふぉ、ふぃ </td><td> fu, fa, fe, fo, fi </td><td> <R>ファ</R>ッション → '<R>fa</R>ccon </td></tr>
+<tr><td> ら行 </td><td> r </td><td> スバ<R>ル</R> → 'suba<R>ru</R> </td></tr>
+<tr><td> つ </td><td> tsu </td><td> コタ<R>ツ</R> → 'kota<R>tsu</R> </td></tr>
+<tr><td> わ </td><td> ua </td><td> 川崎 → か<R>わ</R>さき → 'ka<R>ua</R>saki </td></tr>
+<tr><td> や/ゃ、よ/ょ、ゆ/ゅ、いぇ </td><td> ia, io, iu, ie </td><td> <R>ヤ</R>マハ → '<R>ia</R>maha </td></tr>
+<tr><td> <R>ou</R> or <R>oo</R> as a part of the same kanji/root </td><td>o </td><td>
+北海道 → ほっかい<R>どう</R> → 'hokkai<R>do</R><br>
+大阪 → <R>おお</R>さか → '<R>o</R>saka
+</td></tr>
+<tr><td> <R>uu</R> as a part of the same kanji/root </td><td> u </td><td> 九州 → きゅうしゅう → 'kiucu </td></tr>
+<tr><td> ん </td><td> n </td><td> 群馬 → ぐ<R>ん</R>ま → 'gu<R>n</R>ma </td></tr>
+<tr><td> ー (長音記号) </td><td> (ignored) </td><td> セーラー服 → 'serafuku </td></tr>
+<tr><td> っ </td><td> repeat the [first] consonant </td><td>
+	札幌 → さ<R>っぽ</R>ろ → 'sa<R>ppo</R>ro <br>
+	抹茶 → ま<R>っちゃ</R> → 'ma<R>ttca</R> <br>
+</td></tr>
+
+
+
+
+</table>
+
+<p>Common Japanese words</p>
+<table>
+<tr>
+	<th> English </th>
+	<th> Japanese</th>
+	<th> Nao </th>
+</tr>
+
+
+<tr><td> Tokyo </td><td> 東京 </td><td> 'tokio </td></tr>
+<tr><td> Kyoto </td><td> 京都 </td><td> 'kioto </td></tr>
+<tr><td> Kobe </td><td> 神戸 </td><td> 'kobe </td></tr>
+<tr><td> Hitachi </td><td> 日立 </td><td> 'hitatci </td></tr>
+<tr><td> Mitsubishi </td><td> 三菱 </td><td> 'mitsubici </td></tr>
+<tr><td> Jiu-jitsu </td><td> 柔術 </td><td> 'jujutsu </td></tr>
+<tr><td> Judo </td><td> 柔道 </td><td> 'judo </td></tr>
+
+<tr><td>  </td><td> </td><td>  </td></tr>
+
+
+</table>
+
+</div>
+
+<p> Below you can put a Japanese word in the standard <a href="https://en.wikipedia.org/wiki/Hepburn_romanization">Hepburn system</a> to see its Nao transliteration </p>
+
+<input id="transliteration_input">
+<button id="transliterate_button">Transliterate</button>
+<h2 id="output"></h2>
+
+
+<script>
+
+function transliterate_Japanese_to_Nao(w) {
+	w = w.toLowerCase();
+	let n = "tc i u c".split(' ');
+	let r = "ch y w sh".split(' ');
+	for (let i=0; i < r.length; i++) {
+		w = w.split(r[i]).join(n[i]);
+	}
+
+	return "'"+w;
+}
+
+document.getElementById("transliterate_button").addEventListener("click", function(){
+	let w = document.getElementById("transliteration_input").value;
+	document.getElementById("output").innerText = w + " → " + transliterate_Japanese_to_Nao(w);
+});
+
+</script>
+</body>
+</html>

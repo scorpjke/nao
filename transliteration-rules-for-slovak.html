@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>
+		Nao dictionary
+	</title>
+	<meta charset="utf-8">
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body style="text-align: center; margin-bottom: 100px">
+
+<div id="header"></div>
+<script src="js.cookie.js"></script>
+<script src="header.js"></script>
+<div class="main" style="margin-left: 5%; margin-right: 5%">
+
+<h1 class="e"> Transliteration rules for Slovak</h1>
+
+
+<p> Here are the non-obvious links between Slovak spelling and Nao transliteration:</p>
+<table>
+<tr>
+	<th style="width: 200px"> Slovak </th>
+	<th>　Nao　</th>
+	<th> Example </th>
+
+<tr><td> j, i, y </td><td> i </td><td> Ján → 'ian </td></tr>
+<tr><td> h </td><td> g </td><td> Humenné → 'gumenne </td></tr>
+<tr><td> ch </td><td> h </td><td> Vojtech → 'voiteh </td></tr>
+<tr><td> c </td><td> ts </td><td> Košice → 'kocitse </td></tr>
+<tr><td> š </td><td> c </td><td> Tomáš → 'tomac </td></tr>
+<tr><td> ž </td><td> j </td><td> Žilina → 'jilina </td></tr>
+<tr><td> č </td><td> tc </td><td> Trenčín → 'trentcin </td></tr>
+<tr><td> ň, ľ, ť, ď <br>before a vowel</td><td> ni, li, ti, di </td><td> Stará Ľubovňa → 'stara-liubovnia <br>  Piešťany → 'piectiani </td></tr>
+<tr><td> ň, ľ, ť, ď <br>in other cases</td><td> n, l, t, d </td><td> Topoľčany → 'topoltcani <br>  	Sereď → 'sered </td></tr>
+
+<tr><td> l, r <br>between<br>consonants </td><td> yl, yr </td><td> Trnava → 'tyrnava </td></tr>
+<tr><td> ô </td><td> o </td><td>  </td></tr>
+
+
+
+</table>
+
+<p>Common Slovak words</p>
+<table>
+<tr>
+	<th> Slovak </th>
+	<th> Nao </th>
+</tr>
+
+<tr><td> Bratislava </td><td> 'bratislava </td></tr>
+<tr><td> Prešov </td><td> 'precov </td></tr>
+ 	
+
+</table>
+
+</div>
+
+
+<p> Below you can put any Slovak word to see its Nao transliteration <br></p>
+
+<input id="transliteration_input">
+<button id="transliterate_button">Transliterate</button>
+<h2 id="output"></h2>
+
+
+<script>
+
+function transliterate_Slovak_to_Nao(w) {
+	w = w.toLowerCase().normalize('NFD').replace(/\u0301/g, "").normalize('NFC');
+	let n = ("a i i r х g h u ч ш j ts c tc lia liu lio nia niu nio tia tiu tio dia diu dio l n t d ks").split(' ');
+	let r = ("ä j y ř ch h х ů č š ž c ш ч ľa ľu ľo ňa ňu ňo ťa ťu ťo ďa ďu ďo ľ ň ť ď x").split(' ');
+	for (let i=0; i < r.length; i++) {
+		w = w.split(r[i]).join(n[i]);
+	}
+	w = w.replace(/([^aiyueo])(r|l)([^aiyueo])/g,'$1y$2$3');
+
+	return "'"+w;
+}
+
+document.getElementById("transliterate_button").addEventListener("click", function(){
+	let w = document.getElementById("transliteration_input").value;
+	document.getElementById("output").innerText = w + " → " + transliterate_Slovak_to_Nao(w);
+});
+</script>
+
+</body>
+</html>

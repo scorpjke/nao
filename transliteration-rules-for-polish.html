@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>
+		Nao dictionary
+	</title>
+	<meta charset="utf-8">
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body style="text-align: center; margin-bottom: 100px">
+
+<div id="header"></div>
+<script src="js.cookie.js"></script>
+<script src="header.js"></script>
+<div class="main" style="margin-left: 5%; margin-right: 5%">
+
+<h1 class="e"> Transliteration rules for Polish</h1>
+
+
+<p> Here are the non-obvious links between Polish spelling and Nao transliteration:</p>
+<table>
+<tr>
+	<th style="width: 200px"> Polish </th>
+	<th>　Nao　</th>
+	<th> Example </th>
+
+<tr><td> sz</td><td> c </td><td> Tomasz → 'tomac </td></tr>
+<tr><td> cz</td><td> tc </td><td> Biecz → 'bietc </td></tr>
+<tr><td> ż</td><td> j </td><td> Żywiec → 'jyviets </td></tr>
+<tr><td> prz, krz, trz</td><td> pc,kc,tyc </td><td> Krzysztof → 'kcyctof </td></tr>
+<tr><td> rz (in other cases) </td><td> j </td><td> Wałbrzych → 'vaubjyh <br> Chorzów → 'hojuv </td></tr>
+<tr><td> si </td><td> ci </td><td> Siedlce → 'ciedltse </td></tr>
+<tr><td> ś </td><td> c </td><td> Przemyśl → 'pcemycl </td></tr>
+<tr><td> ci </td><td> tci </td><td> Marcin → 'martcin </td></tr>
+<tr><td> ć </td><td> tc </td><td> Zamość → 'zamoctc </td></tr>
+<tr><td> dzi </td><td> ji </td><td> Dziwnów → 'jivnuv </td></tr>
+<tr><td> dź </td><td> j </td><td> Czeladź → 'tcelaj </td></tr>
+<tr><td> zi </td><td> zi </td><td> Zielona Góra → 'zielona-gura </td></tr>
+<tr><td> ź </td><td> z </td><td> Rogoźno → 'rogozno </td></tr>
+<tr><td> ń </td><td> n </td><td> Gdańsk → 'gdansk </td></tr>
+<tr><td> ó </td><td> u </td><td> Kraków → 'krakuv </td></tr>
+<tr><td> c </td><td> ts </td><td> Katowice → 'katovitse </td></tr>
+<tr><td> ł </td><td> u </td><td> Wrocław → 'vrotsuav  </td></tr>
+<tr><td> y</td><td> y</td><td> Olsztyn → 'olctyn </td></tr>
+<tr><td> j</td><td> i</td><td> Janusz → 'ianuc </td></tr>
+<tr><td> ę </td><td> en </td><td> Częstochowa → 'tcenstohova </td></tr>
+<tr><td> ą </td><td> on </td><td> Gąbin → 'gonbin </td></tr>
+
+<tr><td> </td><td> </td><td> </td></tr>
+
+</table>
+
+<p>Common Polish words</p>
+<table>
+<tr>
+	<th> Polish </th>
+	<th> Nao </th>
+</tr>
+
+<tr><td>  Warszawa </td><td> 'varcava </td></tr>
+<tr><td> Bydgoszcz </td><td> 'bydgoctc </td></tr>
+<tr><td> Poznań </td><td> 'poznan </td></tr>
+<tr><td> Szczecin </td><td> 'ctcetcin </td></tr>
+<tr><td> Łódź </td><td> 'uuj </td></tr>
+<tr><td> Białystok </td><td> 'biauystok </td></tr>
+<tr><td> Rzeszów </td><td> 'jecuv </td></tr>
+<tr><td> Trzcianka </td><td> 'tyctcianka </td></tr>
+
+
+<tr><td> </td><td> </td></tr>
+
+
+</table>
+
+</div>
+
+
+
+<p> Below you can put any Polish word to see its Nao transliteration <br></p>
+
+<input id="transliteration_input">
+<button id="transliterate_button">Transliterate</button>
+<h2 id="output"></h2>
+
+
+<script>
+
+function transliterate_Polish_to_Nao(w) {
+	w = w.toLowerCase();
+	let n = ("i v u u n ji j z en on шi ш чi ч ч ш j pш kш tyш j h ts c tc").split(' ');
+	let r = ("j w ó ł ń dzi dź ź ę ą si ś ci ć cz sz ż prz krz trz rz ch c ш ч").split(' ');
+	for (let i=0; i < r.length; i++) {
+		w = w.split(r[i]).join(n[i]);
+	}
+
+	return "'"+w;
+}
+
+document.getElementById("transliterate_button").addEventListener("click", function(){
+	let w = document.getElementById("transliteration_input").value;
+	document.getElementById("output").innerText = w + " → " + transliterate_Polish_to_Nao(w);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>
+		Nao dictionary
+	</title>
+	<meta charset="utf-8">
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body style="text-align: center; margin-bottom: 100px">
+
+<div id="header"></div>
+<script src="js.cookie.js"></script>
+<script src="header.js"></script>
+<div class="main" style="margin-left: 5%; margin-right: 5%">
+
+<h1 class="e"> Transliteration rules for Russian</h1>
+
+<p> Here are the non-obvious links between the Russian letters and Nao transliteration:</p>
+<table>
+<tr>
+	<th> Russian </th>
+	<th>　Nao　</th>
+	<th> Example </th>
+</tr>
+<tr><td> ж </td><td> j </td><td> Воронеж → 'voronej </td></tr>
+<tr><td> ц </td><td> ts </td><td> Липецк → 'lipetsk </td></tr>
+<tr><td> ч </td><td> tc </td><td> Чита → 'tcita </td></tr>
+<tr><td> ш </td><td> c </td><td> Шарапова → 'carapova </td></tr>
+<tr><td> щ, щи </td><td> ci </td><td> Щукино → 'ciukino </td></tr>
+<tr><td> е,э </td><td> е </td><td> Елена → 'elena </td></tr>
+<tr><td> ё </td><td> o (after ж,ш,щ,ч) <br> io (otherwise) </td><td> Горбачёв → 'gorbatcov <br> Пётр → 'piotr  </td></tr>
+<tr><td> ь </td><td> i (before vowel) <br> − (otherwise) </td><td> Воробьёв → 'vorobiiov  <br> Тверь → 'tver </td></tr>
+<tr><td> ъ </td><td> — </td><td>  </td></tr>
+<tr><td> ы </td><td> y </td><td> Сыктывкар → 'syktyvkar</td></tr>
+<tr><td> ю </td><td> iu </td><td> Тюмень → 'tiumen </td></tr>
+<tr><td> я </td><td> ia </td><td> Брянск → 'briansk </td></tr>
+<tr><td> й </td><td> i </td><td> Толстой → 'tolstoi </td></tr>
+<tr><td> жи, ши </td><td> jy, cy </td><td> Балашиха → 'balacyha <br> Дзержинск → 'dzerjynsk </td></tr>
+
+</table>
+
+<p>Common Russian words</p>
+<table>
+<tr>
+	<th> English </th>
+	<th> Russian</th>
+	<th> Nao </th>
+</tr>
+
+<tr><td> Moscow </td><td> Москва </td><td> 'moskva </td></tr>
+<tr><td> Saint Petersburg </td><td> Санкт-Петербург </td><td> 'sankt-peterburg </td></tr>
+<tr><td> Tchaikovsky </td><td> Чайковский </td><td> 'tcaikovskii </td></tr>
+<tr><td> Khrushchev </td><td> Хрущёв </td><td> 'hruciov </td></tr>
+
+
+
+</table>
+
+</div>
+
+<p> Below you can put any Russian word to see its Nao transliteration <br> (do not avoid <b>ё</b>)</p>
+
+<input id="transliteration_input">
+<button id="transliterate_button">Transliterate</button>
+<h2 id="output"></h2>
+
+
+<script>
+
+function transliterate_Russian_to_Nao(w) {
+	w = w.toLowerCase();
+	let n = ("шы жы шо що жо чо ci шь ьа ьу " + "ьо ia io iu ii ie ii a b v g d e j z i i k l m n o p r s t u f h c y e  - ts tc").split(' ');
+	let r = ("ши жи шё щё жё чё щи щ я ю "    +  "ё ьа ьо ьу ьи ье ьi а б в г д е ж з и й к л м н о п р с т у ф х ш ы э ь ъ ц ч").split(' ');
+	for (let i=0; i < r.length; i++) {
+		w = w.split(r[i]).join(n[i]);
+	}
+
+	return "'"+w;
+}
+
+document.getElementById("transliterate_button").addEventListener("click", function(){
+	let w = document.getElementById("transliteration_input").value;
+	document.getElementById("output").innerText = w + " → " + transliterate_Russian_to_Nao(w);
+});
+
+</script>
+</body>
+</html>

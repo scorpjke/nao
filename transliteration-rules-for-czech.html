@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>
+		Nao dictionary
+	</title>
+	<meta charset="utf-8">
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body style="text-align: center; margin-bottom: 100px">
+
+<div id="header"></div>
+<script src="js.cookie.js"></script>
+<script src="header.js"></script>
+<div class="main" style="margin-left: 5%; margin-right: 5%">
+
+<h1 class="e"> Transliteration rules for Czech</h1>
+
+
+<p> Here are the non-obvious links between Czech spelling and Nao transliteration:</p>
+<table>
+<tr>
+	<th style="width: 200px"> Czech </th>
+	<th>　Nao　</th>
+	<th> Example </th>
+
+<tr><td> j, i, y </td><td> i </td><td> Jan → 'ian </td></tr>
+<tr><td> ě </td><td> ie </td><td> Prostějov → 'prostieiov </td></tr>
+<tr><td> ů </td><td> u </td><td> Jirků → 'iirku </td></tr>
+<tr><td> h </td><td> g </td><td> Praha → 'praga </td></tr>
+<tr><td> ch </td><td> h </td><td> Vojtěch → 'voitieh </td></tr>
+<tr><td> c </td><td> ts </td><td> Liberec → 'liberets </td></tr>
+<tr><td> š </td><td> c </td><td> Tomáš → 'tomac </td></tr>
+<tr><td> ž </td><td> j </td><td> Toužim → 'toujim </td></tr>
+<tr><td> č </td><td> tc </td><td> České Budějovice → 'tceske-budieiovitse </td></tr>
+<tr><td> ň, ť, ď <br>before a vowel</td><td> ni, ti, di </td><td> Slatiňany → 'slatiniani <br> Horažďovice → 'gorajdiovitse </td></tr>
+<tr><td> ň, ť, ď <br>in other cases</td><td> n, t, d </td><td> Třeboň → 'trebon <br> Třešť → 'trect </td></tr>
+<tr><td> ř </td><td> r </td><td> Dvořák → 'dvorak </td></tr>
+
+<tr><td> l, r <br>between<br>consonants </td><td> yl, yr </td><td> Plzeň → 'pylzen <br> Brno → 'byrno </td></tr>
+
+
+
+
+<tr><td> </td><td> </td><td> </td></tr>
+
+</table>
+
+<p>Common Czech words</p>
+<table>
+<tr>
+	<th> Czech </th>
+	<th> Nao </th>
+</tr>
+
+<tr><td> Ostrava </td><td> 'ostrava </td></tr>
+
+<tr><td> Hradec Králové </td><td> 'gradets-kralove </td></tr>
+<tr><td> Ústí nad Labem </td><td> 'usti-nad-labem </td></tr>
+<tr><td>   </td><td>  </td></tr>
+
+</table>
+
+</div>
+
+
+<p> Below you can put any Czech word to see its Nao transliteration <br></p>
+
+<input id="transliteration_input">
+<button id="transliterate_button">Transliterate</button>
+<h2 id="output"></h2>
+
+
+<script>
+
+function transliterate_Czech_to_Nao(w) {
+	w = w.toLowerCase();
+	let n = ("i i r х g h u ie ч ш j ts c tc nia niu nio tia tiu tio dia diu dio n t d ks").split(' ');
+	let r = ("j y ř ch h х ů ě č š ž c ш ч ňa ňu ňo ťa ťu ťo ďa ďu ďo ň ť ď x").split(' ');
+	for (let i=0; i < r.length; i++) {
+		w = w.split(r[i]).join(n[i]);
+	}
+	w = w.normalize('NFD').replace(/\u0301/g, "")
+	.replace(/([^aiyueo])(r|l)([^aiyueo])/g,'$1y$2$3');
+
+	return "'"+w;
+}
+
+document.getElementById("transliterate_button").addEventListener("click", function(){
+	let w = document.getElementById("transliteration_input").value;
+	document.getElementById("output").innerText = w + " → " + transliterate_Czech_to_Nao(w);
+});
+</script>
+
+</body>
+</html>

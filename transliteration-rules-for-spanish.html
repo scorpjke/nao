@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>
+		Nao dictionary
+	</title>
+	<meta charset="utf-8">
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body style="text-align: center; margin-bottom: 100px">
+
+<div id="header"></div>
+<script src="js.cookie.js"></script>
+<script src="header.js"></script>
+<div class="main" style="margin-left: 5%; margin-right: 5%">
+
+<h1 class="e"> Transliteration rules for Spanish</h1>
+
+
+<p> Here are the least obvious differences between Spanish spelling/phonemes and Nao transliteration:</p>
+<table>
+<tr>
+	<th> Spanish </th>
+	<th>　Nao　</th>
+	<th> Example </th>
+
+<tr><td> z </td><td> s </td><td>
+	<R>Z</R>arago<R>z</R>a → '<R>s</R>arago<R>s</R>a <br>
+	Bar<R>c</R>elona → 'bar<R>s</R>elona
+</td></tr>
+<tr><td> b,v </td><td> b </td><td>
+	<R>V</R>alencia → '<R>b</R>alensia <br>
+	<R>B</R>ogotá → '<R>b</R>ogota
+</td></tr>
+<tr><td> y, ll </td><td> i </td><td>
+	Gua<R>y</R>aquil → 'gua<R>i</R>akil <br>
+	<R>Ll</R>eida → '<R>i</R>eida <br>
+</td></tr>
+<tr><td> h </td><td> − </td><td> Chi<R>h</R>ua<R>h</R>ua → 'tciuaua </td></tr>
+<tr><td> j </td><td> h </td><td>
+	San <R>J</R>osé → 'san-<R>h</R>ose <br>
+	<R>G</R>i<R>j</R>ón → '<R>h</R>i<R>h</R>on
+</td></tr>
+<tr><td> ñ </td><td> ni </td><td> Logro<R>ñ</R>o → 'logro<R>ni</R>o </td></tr>
+
+<tr><td> </td><td>  </td><td>  </td></tr>
+
+</table>
+
+<p>Common Spanish words</p>
+<table>
+<tr>
+	<th> Spanish </th>
+	<th> Nao </th>
+</tr>
+
+<tr><td> Madrid </td><td> 'madrid </td></tr>
+<tr><td> Guatemala </td><td> 'guatemala </td></tr>
+<tr><td> Buenos Aires </td><td> 'buenos-aires </td></tr>
+<tr><td> Puerto Rico </td><td> 'puerto-riko </td></tr>
+<tr><td> mojito </td><td> 'mohito </td></tr>
+<tr><td> burrito </td><td> 'burito </td></tr>
+
+
+<tr><td>  </td><td>  </td></tr>
+
+
+</table>
+
+</div>
+
+<p> Below you can put a Spanish word to see its Nao transliteration </p>
+
+<input id="transliteration_input">
+<button id="transliterate_button">Transliterate</button>
+<h2 id="output"></h2>
+
+
+<script>
+
+function transliterate_Spanish_to_Nao(w) {
+	w = w.toLowerCase();
+	let n = "a i u e o чч zi ze s k ji je i b u ni  h k ge gi tc i r".split(' ');
+	let r = "á í ú é ó ch ci ce z c gi ge y v ü ñ h j qu gue gui чч ll rr".split(' ');
+	for (let i=0; i < r.length; i++) {
+		w = w.split(r[i]).join(n[i]);
+	}
+
+	return "'"+w;
+}
+
+document.getElementById("transliterate_button").addEventListener("click", function(){
+	let w = document.getElementById("transliteration_input").value;
+	document.getElementById("output").innerText = w + " → " + transliterate_Spanish_to_Nao(w);
+});
+</script>
+</body>
+</html>

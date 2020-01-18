@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>
+		Textbook
+	</title>
+	<meta charset="utf-8">
+	<link href="style.css" rel="stylesheet" type="text/css">
+	<script src="js.cookie.js"></script>
+	<script src="comdic.js"></script>
+	<script src="translation.js"></script>
+</head>
+<body onkeydown="handleKeyPress(event)">
+
+
+	<div id="header"></div>
+	<script src="header.js"></script>
+	<div class="main">
+		<h1 id="storyname" class="e"> </h1>
+
+		<div id="under_header" style="padding-left: 20%; padding-right: 20%">
+		<div id="storytext"> </div>
+	</div>
+</body>
+<script>
+	let text =`<h3 class="e">pa lasilekdaneima pa gosrus </h3> − male-in_state-live-long go-and_as_a_result-be_located place-element-choose-person-control-place, go-near one person-work and do-QUESTION :
+: QUESTION allowed begin-know QUESTION female-married me inside-PAST element-choose
+: ADVERB-PASSIVE-find_easy-think-and_as_a_result-know – ask me see/look – true, me notice female-that write-object-named-self – but what PASSIVE-do, male-in_state-live-long – QUESTION not reside-with-each_other −
+: only-CLAUSE female-that ANGRY-dead before one-five year but year-all go-and_as_a_result-be_located for_the_sake element-choose – and me occurence-all not-succeed meet female-that −
+
+−−−−−−−−−−−−−−−−−−−−
+
+	− one male inside-go-use-vehicle_with_cabin-solid to act_of-meet, late, tense-convinced-in_danger-self-not-succeed, not-able notice-and_as_a_result-cause-self-have object-be_located for_the_sake stop-go with cause-be_located vehicle_with_cabin-solid − male cause-top front-head to sky and speak:
+"o_great-person-cause-all, GIANT-ask-cause-find_easy me notice-and_as_a_result-cause-self-have object-be_located for_the_sake stop-go with cause-be_located vehicle_with_cabin-solid − then me stop eat/drink-alcohol and begin-go place-speak-with-person-cause-all weekday-seven all =important="
+− ADVERB-not-PASSIVE-convinced-FUTURE ADVERB-do_magic begin-exist object-be_located have-inside-self-none − male more-front o_great-begin-speak to sky:
+"綱a, ask-not-feel-important − me succeed-notice-and_as_a_result-cause-self-have"
+`;
+
+	document.getElementById('storyname').innerHTML = unmake_neutral(`story-find_funny-GIANT-short`);
+	document.getElementById('storytext').innerHTML = unmake_neutral(text).replace(/\n/g,'<br>');
+</script>
+</html>

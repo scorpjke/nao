@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>
+		Nao dictionary
+	</title>
+	<meta charset="utf-8">
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body style="text-align: center; margin-bottom: 100px">
+
+<div id="header"></div>
+<script src="js.cookie.js"></script>
+<script src="header.js"></script>
+<div class="main" style="margin-left: 5%; margin-right: 5%">
+
+<h1 class="e"> Transliteration rules for Bulgarian</h1>
+
+
+<p> Here are the non-obvious links between Bulgarian spelling and Nao transliteration:</p>
+<table>
+<tr>
+	<th style="width: 50px"> Bulgarian </th>
+	<th>　Nao　</th>
+	<th> Example </th>
+
+<tr><td> и, й </td><td> i </td><td> Панайотов → 'panaiotov </td></tr>
+<tr><td> я, ю, ьо</td><td> ia, iu, io </td><td> София → 'sofiia </td></tr>
+<tr><td> щ </td><td> ct </td><td> Търговище → 'tyrgovicte </td></tr>
+<tr><td> ж </td><td> j </td><td> Надежда → 'nadejda </td></tr>
+<tr><td> ц </td><td> ts </td><td> Враца → 'vratsa </td></tr>
+<tr><td> ч </td><td> tc </td><td> Добрич → 'dobritc </td></tr>
+<tr><td> ъ </td><td> y </td><td> Слънчев бряг → 'slyntcev-briag </td></tr>
+
+
+
+</table>
+
+<p>Common Bulgarian words</p>
+<table>
+<tr>
+	<th> Bulgarian </th>
+	<th> Nao </th>
+	<th> English </th>
+</tr>
+
+
+<tr><td> Варна </td><td> 'varna </td><td> Varna </td></tr>
+<tr><td> Пловдив </td><td> 'plovdiv </td><td> Plovdiv </td></tr>
+<tr><td> Ванчев </td><td> 'vantcev </td><td> Vanchev </td></tr>
+
+</table>
+
+</div>
+
+
+<p> Below you can put any Bulgarian word to see its Nao transliteration <br></p>
+
+<input id="transliteration_input">
+<button id="transliterate_button">Transliterate</button>
+<h2 id="output"></h2>
+
+
+<script>
+
+function transliterate_Ukrainian_to_Nao(w) {
+	w = w.toLowerCase();
+	let n = ("ia io iu a b v g d e j z i i k l m n o p r s t u f h c ct  ts tc y").split(' ');
+	let r = ("я ьо ю а б в г д е ж з и й к л м н о п р с т у ф х ш щ ь ц ч ъ").split(' ');
+	for (let i=0; i < r.length; i++) {
+		w = w.split(r[i]).join(n[i]);
+	}
+
+	return "'"+w;
+}
+
+document.getElementById("transliterate_button").addEventListener("click", function(){
+	let w = document.getElementById("transliteration_input").value;
+	document.getElementById("output").innerText = w + " → " + transliterate_Ukrainian_to_Nao(w);
+});
+</script>
+
+</body>
+</html>

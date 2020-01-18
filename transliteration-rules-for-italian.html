@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>
+		Nao dictionary
+	</title>
+	<meta charset="utf-8">
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body style="text-align: center; margin-bottom: 100px">
+
+<div id="header"></div>
+<script src="js.cookie.js"></script>
+<script src="header.js"></script>
+<div class="main" style="margin-left: 5%; margin-right: 5%">
+
+<h1 class="e"> Transliteration rules for Italian</h1>
+
+
+<p> Here are the non-obvious links between Italian spelling and Nao transliteration:</p>
+<table>
+<tr>
+	<th style="width: 200px"> Italian </th>
+	<th>　Nao　</th>
+	<th> Example </th>
+
+<tr><td> double consonants </td><td> (single consonant) </td><td> Ferrari → 'ferari </td></tr>
+<tr><td> sci, ci, gi <br>before a vowel </td><td> c, tc, j </td><td> prosciutto → 'procuto </td></tr>
+<tr><td> sci, ci, gi <br> in other cases </td><td> ci, tci, ji </td><td> Fibonacci → 'fibonatci </td></tr>
+<tr><td> sce, ce, ge </td><td> ce, tce, je </td><td> Versace → 'versatce </td></tr>
+<tr><td> ch, gh </td><td> k, g </td><td> Lamborghini → 'lamborgini </td></tr>
+<tr><td> s </td><td> s (always) </td><td> parmesan → 'parmesan <br> sbarro → 'sbaro </td></tr>
+<tr><td> gn </td><td> ni </td><td> 'lasagna → 'lasania </td></tr>
+<tr><td> gli </td><td> li </td><td> Cagliari → 'kaliari </td></tr>
+<tr><td> h </td><td> (none) </td><td>  </td></tr>
+<tr><td> z </td><td> ts </td><td> pizza → 'pitsa </td></tr>
+
+</table>
+
+<p>Common Italian words</p>
+<table>
+<tr>
+	<th> Italian </th>
+	<th> Nao </th>
+</tr>
+
+<tr><td> Venezia </td><td> 'venetsia </td></tr>
+<tr><td> Brescia </td><td> 'breca </td></tr>
+<tr><td> Milano </td><td> 'milano </td></tr>
+<tr><td> Sicilia </td><td> 'sitcilia </td></tr>
+<tr><td> Gucci </td><td> 'gutci </td></tr>
+<tr><td> Nutella </td><td> 'nutela  </td></tr>
+<tr><td> Dolce & Gabbana </td><td> 'doltce-e-gabana </td></tr>
+<tr><td> Prada </td><td> 'prada </td></tr>
+
+
+
+</table>
+
+</div>
+
+
+<p> Below you can put any Italian word to see its Nao transliteration <br></p>
+
+<input id="transliteration_input">
+<button id="transliterate_button">Transliterate</button>
+<h2 id="output"></h2>
+
+
+<script>
+
+function transliterate_Italian_to_Nao(w) {
+	w = w.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/([bcdfglmnpqrstvz])\1/g,'$1').replace(/(sc|c|g)i([aueo])/g,'$1ь$2');
+	let n =     ("c c шi tшi ji ш tш j шe tшe je k c ts  ni li").split(' ');
+	let r = ("q cq sci ci gi scь cь gь sce ce ge c ш z h gn gli").split(' ');
+	for (let i=0; i < r.length; i++) {
+		w = w.split(r[i]).join(n[i]);
+	}
+
+	return "'"+w;
+}
+
+document.getElementById("transliterate_button").addEventListener("click", function(){
+	let w = document.getElementById("transliteration_input").value;
+	document.getElementById("output").innerText = w + " → " + transliterate_Italian_to_Nao(w);
+});
+</script>
+
+</body>
+</html>

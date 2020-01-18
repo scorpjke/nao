@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>
+		Full Set of Rules
+	</title>
+	<meta charset="utf-8">
+	<link href="style.css" rel="stylesheet" type="text/css">
+	<script src="js.cookie.js"></script>
+	<script src="jquery.min.js"></script>
+</head>
+<body>
+
+	<div id="header"></div>
+	<script src="header.js"></script>
+
+	<script>
+	function load_script(x) {
+		var s = document.createElement('script');
+		s.src = x;
+
+		s.onerror = function() {
+			load_script('comparison-with-esperanto(eng).js');
+		}
+
+		document.getElementsByTagName("head")[0].appendChild(s);
+	}
+
+	load_script(`comparison-with-esperanto(${cur_lang()}).js`);
+	
+	</script>
+
+</body>
+</html>

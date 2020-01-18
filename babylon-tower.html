@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>
+		Textbook
+	</title>
+	<meta charset="utf-8">
+	<link href="style.css" rel="stylesheet" type="text/css">
+	<script src="js.cookie.js"></script>
+	<script src="comdic.js"></script>
+	<script src="translation.js"></script>
+</head>
+<body onkeydown="handleKeyPress(event)">
+
+
+	<div id="header"></div>
+	<script src="header.js"></script>
+	<div class="main">
+		<h1 id="storyname" class="e"> </h1>
+
+		<div id="under_header" style="padding-left: 20%; padding-right: 20%">
+		<div id="storytext"> </div>
+	</div>
+</body>
+<script>
+	let text =`− QUESTION you time-exist PAST want-know QUESTION because-what person not-able understand each_other and ADVERB-speak-more QUESTION because-what person-all speak language different − ADVERB-PASSIVE-able-not-convinced-FUTURE near that MAIN_VERB-exist o_great-story-PASSIVE-do-important − able PASSIVE-notice do_magic quantity-exist but ADVERB-PASSIVE-able exist part object-true inside that, PASSIVE-not-able-completely-convinced − time-exist person PAST-regularly-understand each_other ADVERB-speak language similar − that PASSIVE-FUTURE-convinced because person-that-all be offspring-long 綱'noi CLAUSE not-stop-live time place-liquid-go-place-solid and find object-be_located-safe near place-ground-high 綱'ararat − group-person-place PAST-inside-begin-big and begin-know-with-able-good object in_state-exist-short − after-that regularly-person choose cause-with-and_as_a_result-exist settlement and be_located-inside that cause-with-and_as_a_result-exist stick_shaped-building high quantity sky CLAUSE PASSIVE-able-see/look from object-be_located not-important-QUESTION-what of circle-space-dark − PAST-exist object-quantity-big CLAUSE person MAIN_VERB-inside-PAST-begin-able-good : cause-on_fire element-wall, cause-be_located-with-each_other stone and cause-be_located that to-inside object-bottom-for_the_sake-hold-building − stick_shaped-building MAIN_VERB-inside-PAST-begin-high ADVERB-begin-near sky − regularly-person PAST-happy object-quantity-fast CLAUSE object-cause-exist person-that-all MAIN_VERB-begin-big − time person-cause-all begin-know near that, male-that feel-ordinary see/look stick_shaped-building GIANT-big ADJECTIVE-pull-self to sky − person-cause-all not like object-think-and_as_a_result-inside-FUTURE that : regularly-person begin-bad-feel-deserve-PASSIVE-respect-self more-occurence ADVERB-try pull-self-and_as_a_result-near sky − and male-that speak: «be one group-person-place, person-all understand each_other, person-all speak language similar − but inside-do what − ADVERB-feel-deserve-PASSIVE-respect and PASSIVE-find_difficult-cause-stop, person-that-all want pull-self-and_as_a_result-near sky, near o_great-person-cause-all» − person-cause-all not cause-in_state-deserve-bad  person-that-all use cause-dead but cause-one-whole-substance language CLAUSE person-that-all speak − day exist, time regularly-person go-outside to stick_shaped-building, person-that-all ADVERB-not-PASSIVE-convinced-FUTURE stop understand each_other − person-none able understand QUESTION what PASSIVE-speak be_located-near − regularly-person able do none − act_of-cause-with-and_as_a_result-exist stop − regularly-person go-bottom from stick_shaped-building to ground for_the_sake begin-understand QUESTION what inside-PASSIVE-do − but be_located ground regularly-person begin-fight because not-understand object-speak each_other − time see/look that, person-cause-all cause-more-find_easy regularly-person use cause-go regularly-person from settlement not-PASSIVE-completely-cause-with-and_as_a_result-exist and cause-be_located person-that-all to settlement different be_located edge different of circle-space-dark − time time go, regularly-person stop-remember parent-far self ADVERB-begin-have o_great-object-regularly-do and language self –`;
+
+	document.getElementById('storyname').innerHTML = unmake_neutral(`stick_shaped-building 綱'babilon`);
+	document.getElementById('storytext').innerHTML = unmake_neutral(text).replace(/\n/g,'<br>');
+</script>
+</html>

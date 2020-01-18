@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>
+		Textbook
+	</title>
+	<meta charset="utf-8">
+	<link href="style.css" rel="stylesheet" type="text/css">
+	<script src="js.cookie.js"></script>
+	<script src="comdic.js"></script>
+	<script src="translation.js"></script>
+</head>
+<body onkeydown="handleKeyPress(event)">
+
+
+	<div id="header"></div>
+	<script src="header.js"></script>
+	<div class="main">
+		<h1 id="storyname" class="e"> </h1>
+
+		<div id="under_header" style="padding-left: 20%; padding-right: 20%">
+		<div id="storytext" style="text-align: center"> </div>
+	</div>
+</body>
+<script>
+	let text =`
+	− object-be_located good be object-be_located CLAUSE self not-be_located −
+
+− go more-slow then go more-far −
+
+− not_exist gas-from-on_fire not-with act_of-on_fire −
+
+− ask-not cause-be_located to day-next object CLAUSE able do day-NOW −
+
+− choose quantity-big then not FUTURE married −
+
+− hit two bird use one stone −
+
+− water cause-shape-cut-good stone −
+
+− bodypart-see/look in_exchange bodypart-see/look, bodypart-bite in_exchange bodypart-bite −
+
+− apple go-bottom be_located not-far 綱def-apple −
+
+− live GIANT-two year, begin-know-with-understand GIANT-two year −
+
+− live with dog-place-綱def then do_voice similar dog-place-綱def −
+
+− act_of-do do_voice more-PASSIVE-hear/listen-big from object-speak −
+
+− one object-see/look more-good from GIANT-three word −
+
+− self do therefore self solve object-therefore −
+
+− dog CLAUSE do_voice MAIN_VERB not-bite −
+
+− ask-do object CLAUSE forbidden-not do, ask-PASSIVE-do object CLAUSE FUTURE PASSIVE-do
+
+− want-with-convinced-able-true object-completely-more-good, cause-in_state-able to object-completely-more-bad −
+
+− cause-not-with-each_other and control −
+
+− object-speak hit more-strong from GIANT-stick_shaped-fight-cut −
+
+− 綱'roma not PASSIVE-cause-with-and_as_a_result-exist one day −
+
+− two head more-good from one −
+
+− seven person not wait one −
+
+− time be_located place-綱'roma, ask-do similar person-綱'roma −
+
+− if exist object CLAUSE want PASSIVE-do ADVERB-completely-more-good, ask-do that ADVERB-self −
+
+− person-prone-understand think ADVERB-similar −
+
+− time-be-child, tree PAST more high and grass more color-two −
+
+− act_of-strong big then act_of-forbidden-not-solve big −
+`;
+
+	document.getElementById('storyname').innerHTML = unmake_neutral(`object-speak prone-understand`);
+	document.getElementById('storytext').innerHTML = unmake_neutral(text).replace(/\n/g,'<br>');
+</script>
+</html>

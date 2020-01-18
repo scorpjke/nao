@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>
+		Dictionary of combinations
+	</title>
+	<meta charset="utf-8">
+	<link href="style.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+	<script src="comdic.js"></script>
+	<script src="js.cookie.js"></script>
+	<script src="translation.js"></script>
+	<script src="definition_generation.js"></script>
+	
+</head>
+<body>
+
+<div id="header"></div>
+<script src="header.js"></script> 
+
+<div class="main">
+	<h1 class="e"> Nao combinations </h1>
+	<div class="my_column">
+
+	</div>
+
+	<div class="my_column">
+		<div class="e" id="demo2"></div>
+	</div>
+
+	<div class="my_column">
+		
+	</div>
+</div>
+
+<script>
+	const main2 = () => {
+		var res = "";
+	
+		var k=1;
+		res += '<div id="big_comb_table">';
+		for (let e in cur_dic().from_Nao) {
+			res += '<div><div class="table_line"><div>' + k + '.</div><div><i>' + e + '</i></div><div>' + cur_dic().from_Nao[e][0] + "</div></div></div>";
+			k++;
+		}
+		res += '</div>';
+
+		document.getElementById("demo2").innerHTML = res;
+	}
+	main2();
+
+	function open_block() {
+		var whole_block = this;
+		//alert(whole_block.children.length);
+		if (whole_block.children.length == 1) {
+			var d = disassemble(whole_block.children[0].children[1].innerText);
+			var qw = print_translation_by_elem_from_disassemble(d, 10);
+			whole_block.innerHTML += '<div>' + qw +
+			(qw.includes('*') ? "" : '<div>Definition: <b>' + generate_definition_from_disassemble(d).join(' ') + '</b></div>') +
+			'</div>';
+		}
+		
+		$(whole_block.children[1]).toggle(300);
+	}
+
+	$('#big_comb_table > div').click(open_block);
+</script>
+
+
+<div id="footer"></div>
+<script src="footer.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>
+		Nao dictionary
+	</title>
+	<meta charset="utf-8">
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body style="text-align: center; margin-bottom: 100px">
+
+<div id="header"></div>
+<script src="js.cookie.js"></script>
+<script src="header.js"></script>
+<div class="main" style="margin-left: 5%; margin-right: 5%">
+
+<h1 class="e"> Transliteration rules for Vietnamese</h1>
+
+
+<p> Here are the non-obvious links between Vietnamese spelling and Nao transliteration:</p>
+<table>
+<tr>
+	<th > Vietnamese </th>
+	<th >　Nao　</th>
+	<th> Example </th>
+
+<tr><td> a, ă </td><td> a </td><td> Đ<R>à</R> N<R>ẵ</R>ng → 'd<R>a</R>n<R>a</R>ng </td></tr>
+<tr><td> â, ơ </td><td> y </td><td> C<R>ầ</R>n Th<R>ơ</R> → 'k<R>y</R>nth<R>y</R> </td></tr>
+<tr><td> e, ê </td><td> e </td><td> Bi<R>ê</R>n Hòa → 'bi<R>e</R>nhoa </td></tr>
+<tr><td> o, ô </td><td> o </td><td> Bả<R>o</R> L<R>ộ</R>c → 'ba<R>o</R>l<R>o</R>k </td></tr>
+<tr><td> u, ư </td><td> u </td><td> Th<R>ừ</R>a Thiên–H<R>u</R>ế → 'th<R>u</R>athienh<R>u</R>e  </td></tr>
+<tr><td> i,y </td><td> i </td><td> Thá<R>i</R> Ngu<R>y</R>ên → 'tha<R>i</R>ngu<R>i</R>en </td></tr>
+<tr><td> tr </td><td> j </td><td> Nha <R>Tr</R>ang → 'nia<R>j</R>ang  </td></tr>
+<tr><td> ch (initial) </td><td> tc </td><td> Hồ <R>Ch</R>í Minh → 'ho<R>tc</R>iming </td></tr>
+<tr><td> ph </td><td> f </td><td> Hải <R>Ph</R>òng → ‘hai<R>f</R>ong </td></tr>
+<tr><td> th </td><td> th </td><td> Phan <R>Th</R>iết → 'fan<R>th</R>iet </td></tr>
+<tr><td> kh </td><td> kh </td><td> <R>Kh</R>ánh Hòa → '<R>kh</R>ainghoa </td></tr>
+<tr><td> nh (initial), <br> nhi </td><td> ni </td><td> Qui <R>Nh</R>ơn → 'kui<R>ni</R>yn <br> <R>Nhi</R>ếp → '<R>ni</R>ep </td></tr>
+<tr><td> ng </td><td> ng </td><td> <R>ng</R>a<R>ng</R> → '<R>ng</R>a<R>ng</R> </td></tr>
+<tr><td> đ </td><td> d </td><td> <R>Đ</R>à Lạt → '<R>d</R>alat </td></tr>
+<tr><td> r </td><td> r </td><td> Bà <R>R</R>ịa → 'ba<R>r</R>ia </td></tr>
+<tr><td> d, gi </td><td> z </td><td> Hải <R>D</R>ương → 'hai<R>z</R>uyng </td></tr>
+<tr><td> c,k,q </td><td> k </td><td> Phú <R>Q</R>uố<R>c</R> → 'fu<R>k</R>uo<R>k</R> </td></tr>
+<tr><td> s </td><td> c </td><td> <R>S</R>ông Cầu → '<R>c</R>ongkyu </td></tr>
+<tr><td> x </td><td> s </td><td> Long <R>X</R>uyên → 'long<R>s</R>uien </td></tr>
+<tr><td> anh, ach </td><td> aing, aik </td><td> Th<R>anh</R> Hóa → 'th<R>aing</R>hoa <br> R<R>ạch</R> Giá → 'r<R>aik</R>za </td></tr>
+<tr><td> ênh, êch </td><td> eng, ek </td><td> Phạm M<R>ệnh</R> → 'famm<R>eng</R> </td></tr>
+<tr><td> inh, ich </td><td> ing, ik </td><td> Tây N<R>inh</R> → 'tyin<R>ing</R> <br> Th<R>ích</R> → 'th<R>ik</R> </td></tr>
+<tr><td> silent h <br> after g </td><td> (none) </td><td> Ng<R>h</R>ệ An → 'ngean </td></tr>
+
+</table>
+
+<p>Common Vietnamese words</p>
+<table>
+<tr>
+	<th> Vietnamese </th>
+	<th> Nao </th>
+</tr>
+
+<tr><td> Hà Nội </td><td> 'hanoi </td></tr>
+<tr><td> Vũng Tàu </td><td> 'vungtau </td></tr>
+<tr><td> Nguyễn </td><td> 'nguien </td></tr>
+<tr><td> Trần </td><td> 'jyn </td></tr>
+<tr><td> Phạm </td><td> 'fam </td></tr>
+
+
+<tr><td>  </td><td>  </td></tr>
+
+
+</table>
+
+</div>
+
+<p> Below you can put any Vietnamese word to see its Nao transliteration </p>
+
+<input id="transliteration_input">
+<button id="transliterate_button">Transliterate</button>
+<h2 id="output"></h2>
+
+<script>
+
+function transliterate_Russian_to_Nao(w) {
+	w = w.toLowerCase().normalize('NFD').replace(/^(.*)([\u0300-\u036f])([\u0302\u0306])(.*)$/g, "$1$3$2$4");
+	w = w.replace(/ê/,'ê').replace(/ô/,'ô').replace(/â/,'â').replace(/ă/,'ă').replace(/ư/,'ư').replace(/ơ/,'ơ').replace(/[\u0300-\u036f]/g,'');
+	w = ' ' + w + ' ';
+
+	let g = "y_i_ă_a_ư_u_â_y_ơ_y_ô_o_ê_e_d_z_đ_d_tr_j_ach_aik_anh_aing_ech_ek_enh_eng_inh_ing_ich_ik_ch_ч_nhi_ni_nh_ni_ph_f_gi _zi _gi_z_c_k_q_k_ghi_gi_ghe_ge_ч_tc_s_c_x_s";
+
+	g = g.split('_');
+
+	for (let i=0; i < g.length/2; i++) {
+		w = w.split(g[i*2]).join(g[i*2+1]);
+	}
+
+	return "'"+w.trim().replace(/[ \-–]/g,'');
+}
+
+document.getElementById("transliterate_button").addEventListener("click", function(){
+	let w = document.getElementById("transliteration_input").value;
+	document.getElementById("output").innerText = w + " → " + transliterate_Russian_to_Nao(w);
+});
+
+</script>
+
+
+</body>
+</html>

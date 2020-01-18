@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>
+		Nao dictionary
+	</title>
+	<meta charset="utf-8">
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body style="text-align: center; margin-bottom: 100px">
+
+<div id="header"></div>
+<script src="js.cookie.js"></script>
+<script src="header.js"></script>
+<div class="main" style="margin-left: 5%; margin-right: 5%">
+
+<h1 class="e"> Transliteration rules for Turkish</h1>
+
+
+<p> Here are the non-obvious links between Turkish spelling and Nao transliteration:</p>
+<table>
+<tr>
+	<th style="width: 200px"> Turkish </th>
+	<th>　Nao　</th>
+	<th> Example </th>
+
+<tr><td> y </td><td> i </td><td> Antalya → 'antalia </td></tr>
+<tr><td> u,ü </td><td> u </td><td> Atatürk → 'ataturk </td></tr>
+<tr><td> o,ö </td><td> o </td><td> Körfez → 'korfez </td></tr>
+<tr><td> ı </td><td> y </td><td>  Diyarbakır → 'diiarbakyr </td></tr>
+<tr><td> ş </td><td> c </td><td> Eskişehir → 'eskicehir </td></tr>
+<tr><td> ç </td><td> tc </td><td> Çorum → 'tcorum </td></tr>
+<tr><td> c </td><td> j </td><td> Kocaeli → 'kojaeli </td></tr>
+<tr><td> ğ <br> between vowels  </td><td> (ignore) </td><td> Erdoğan → 'erdoan </td></tr>
+<tr><td> ğ <br> in other cases </td><td> (double the previous vowel)  </td><td> Tekirdağ → 'tekirdaa  </td></tr>
+<tr><td> circumflex <br>on vowels </td><td> (ignore) </td><td> Elâzığ → 'elazyy </td></tr>
+
+</table>
+
+<p>Common Turkish words</p>
+<table>
+<tr>
+	<th> Turkish </th>
+	<th> Nao </th>
+</tr>
+
+<tr><td> İstanbul </td><td> 'istanbul </td></tr>
+<tr><td> Ankara </td><td> 'ankara  </td></tr>
+
+
+</table>
+
+</div>
+
+
+<p> Below you can put any Turkish word to see its Nao transliteration <br></p>
+
+<input id="transliteration_input">
+<button id="transliterate_button">Transliterate</button>
+<h2 id="output"></h2>
+
+
+<script>
+
+function transliterate_Turkish_to_Nao(w) {
+	w = w.replace(/I/g,'ı').toLowerCase();
+	let n = ("i y o u j tc c").split(' ');
+	let r = ("y ı ö ü c ç ş").split(' ');
+	for (let i=0; i < r.length; i++) {
+		w = w.split(r[i]).join(n[i]);
+	}
+	w = w.normalize('NFD').replace(/\u0302/g, "").normalize('NFC')
+	.replace(/([aiueoy])ğ([aiueoy])/, '$1$2')
+	.replace(/([aiueoy])ğ/, '$1$1');
+
+	return "'"+w;
+}
+
+document.getElementById("transliterate_button").addEventListener("click", function(){
+	let w = document.getElementById("transliteration_input").value;
+	document.getElementById("output").innerText = w + " → " + transliterate_Turkish_to_Nao(w);
+});
+</script>
+
+</body>
+</html>

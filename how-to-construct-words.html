@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>
+		Nao dictionary
+	</title>
+	<meta charset="utf-8">
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body onkeydown="handleKeyPress(event)">
+
+
+	<div id="header"></div>
+	<script src="js.cookie.js"></script>
+	<script src="header.js"></script>
+
+	<div class="main">
+
+	<h1 class="e"> Nao textbook: How to construct words</h1>
+
+	<div id="under_header" class="container" style="width: 100%">
+
+		<script src="textbook_buttons.js"></script>
+
+		<div style="vertical-align: top; width: 70%">
+			The basis of the language are the so-called <b>elementary words</b>.<br>
+			The structure of each standard elementary word: <b>one consonant</b> + <b>vowel(s)</b> + (optionally) <b>consonant(s)</b>.<br>
+			For example, <b>ku, sim, faia</b> are elementary words but <b>bombufui</b> is a compound word consisting of <b>bom + bu + fui</b>.<br>
+			<br>
+			<h2 class="e">Nouns and verbs</h2>
+			Two main groups of elementary words are nouns and verbs, and here are the rules of how to put them together.
+			Any elementary noun or verb can be modified (=described / made more specific) by another noun or verb: just put the describing word after the word being described. Note that the left word must be elementary.
+
+			<div class="container" style="padding: 30px 30px">
+				<table style="width: auto; margin: 0px 0px">
+					<tr>
+						<th>Compound</th>
+						<th>Primary bond</th>
+					</tr>
+					<tr>
+						<td>[noun<sub>1</sub>] [noun<sub>2</sub>]</td>
+						<td>[noun<sub>1</sub>] of [noun<sub>2</sub>]</td>
+					</tr>
+					<tr>
+						<td>[noun] [verb]</td>
+						<td>[noun] who does [verb]</td>
+					</tr>
+					<tr>
+						<td>[verb] [noun]</td>
+						<td>[verb], the object being [noun]</td>
+					</tr>
+					<tr>
+						<td>[verb<sub>1</sub>] [verb<sub>2</sub>]</td>
+						<td>[verb<sub>1</sub>], the object being [verb<sub>2</sub>]</td>
+					</tr>
+				</table>
+				<table style="width: auto">
+					<tr>
+						<th>Secondary bond</th>
+					</tr>
+					<tr style="height: 188px">
+						<td>[word<sub>1</sub>] described by [word<sub>2</sub>]</td>
+					</tr>
+				</table>
+			</div>
+			If the left word is a noun, the resulting compound is a noun.<br>
+			If the left word is a verb, the resulting compound is a verb.<br>
+			Use the secondary meaning if and only if the primary meaning doesn't make much sense.<br>
+			<br>
+			Let’s consider each of the four cases in detail:<br>
+
+			<h3>
+				Case 1: [noun<sub>1</sub>] [noun<sub>2</sub>]
+			</h3>
+			
+			<div class="container" >
+				<div style="width: 600px; padding-left: 50px">
+					a) [noun<sub>1</sub>] of [noun<sub>2</sub>], for example:<br>
+					<b class="g">cu</b> = top<br>
+					<b class="g">likbac</b> = face<br>
+					<b class="g">culikbac</b> = forehead (“top“ of “face“)<br>
+				</div>
+				<div>
+					b) [noun<sub>1</sub>] described by [noun<sub>2</sub>], for example:<br>
+					<b class="g">dia</b> = day<br>
+					<b class="g">biu</b> = city/town/village<br>
+					<b class="g">diabiu</b> = city day (“day“ described by “city“)<br>
+				</div>
+			</div>
+
+			<h3>
+				Case 2: [noun] [verb]
+			</h3>
+
+			<div class="container" >
+				<div style="width: 600px; padding-left: 50px">
+					<div>a) [noun] who does [verb], for example:</div>
+					<b class="g">da</b> = person<br>
+					<b class="g">banbedue</b> = win<br>
+					<b class="g">dabanbedue</b> = winner (“person“ who “wins“)<br>
+				</div>
+				<div>
+					b) [noun<sub>1</sub>] described by [verb<sub>2</sub>], for example:<br>
+					<b class="g">fue</b> = cloth<br>
+					<b class="g">neleu</b> = make dry<br>
+					<b class="g">fueneleu</b> =  wiping cloth (“cloth” described by “make dry”)<br>
+				</div>
+			</div>
+
+			<h3>
+				Case 3: [verb] [noun] 
+			</h3>
+
+			<div class="container" >
+				<div style="width: 600px; padding-left: 50px">
+					<div>a) [verb], the object being [noun], for example:</div>
+					<b class="g">fi</b> = like<br>
+					<b class="g">miau</b> = cats<br>
+					<b class="g">fimiau</b> = like cats (“like“, the object being “cats“)<br>
+				</div>
+				<div>
+					b) [verb] described by [noun], for example:<br>
+					<b class="g">go</b> = go<br>
+					<b class="g">bu</b> = bodypart<br>
+					<b class="g">gobu</b> =  <br>go using only one's own body force (“go“, described by “bodypart“)<br>
+				</div>
+			</div>
+
+			<h3>
+				Case 4: [verb<sub>1</sub>] [verb<sub>2</sub>]
+			</h3>
+			
+			<div class="container" >
+				<div style="vertical-align: top; width: 600px; padding-left: 50px">
+					a) [verb<sub>1</sub>], the object being [verb<sub>2</sub>], for example:<br>
+					<b class="g">moi</b> = want<br>
+					<b class="g">sa</b> = know<br>
+					<b class="g">moisa</b> = want to know (“want“, the object being “know“)<br>
+				</div>
+				<div style="vertical-align: top; width: 600px;">
+					b) [verb<sub>1</sub>] described by [verb<sub>2</sub>], for example:<br>
+					<b class="g">fo</b> = believe/be convinced<br>
+					<b class="g">sim</b> = be similar/same<br>
+					<b class="g">fosim</b> = agree (“believe/be convinced“ described by “be similar/same“)<br>
+				</div>
+			</div>
+
+			<h2 class="e">
+				Prefixes
+			</h2>
+			Prefixes are a relatively small group of elementary words. They are put right before the word they modify. They can't be modified. They can't be used alone. They are ignored when analyzing the grammatical structure of a compound. For example, if we apply a prefix to a noun, grammatically the whole word is still a noun.
+
+			<h2 class="e">Other rules</h2>
+			1. To build an antonym of an elementary word (i.e. change its meaning to the opposite), alternate the last vowels u/i. This can only be done where only one good objective solution exists, so this trick does not work for all elementary words.<br>
+		</div>
+	</div>
+	</div>
+	</body>
+</html>

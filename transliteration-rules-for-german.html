@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>
+		Nao dictionary
+	</title>
+	<meta charset="utf-8">
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body style="text-align: center; margin-bottom: 100px">
+
+<div id="header"></div>
+<script src="js.cookie.js"></script>
+<script src="header.js"></script>
+<div class="main" style="margin-left: 5%; margin-right: 5%">
+
+<h1 class="e"> Transliteration rules for Polish</h1>
+
+
+<p> Here are the non-obvious links between German spelling and Nao transliteration:</p>
+<table>
+<tr>
+	<th style="width: 200px"> German </th>
+	<th>　Nao　</th>
+	<th> Example </th>
+
+<tr><td> double consonant (syllable final) </td><td> single consonant </td><td> Bonn → 'bon </td></tr>
+<tr><td> dt <br>(syllable final) </td><td> t </td><td> Schmidt → 'cmit </td></tr>
+<tr><td> v </td><td> f </td><td> Hannover → 'hanofer </td></tr>
+<tr><td> w </td><td> v </td><td> Wien → 'vien </td></tr>
+<tr><td> r </td><td> r </td><td> Frankfurt → 'frankfurt </td></tr>
+<tr><td> sch </td><td> c </td><td> Bosch → 'boc </td></tr>
+<tr><td> h (before vowels), ch </td><td> h </td><td> Michael → 'mihael </td></tr>
+<tr><td> z, tz </td><td> ts </td><td> Benz → 'bents </td></tr>
+<tr><td> st, sp <br> (pronounced with "sch") </td><td> ct, cp </td><td> Stuttgart → 'ctutgart <br> Spielberg → 'cpilberg </td></tr>
+<tr><td> s (in other cases), ß <br> </td><td> s </td><td> Dresden → 'dresden </td></tr>
+<tr><td> ie </td><td> i </td><td> Siemens → 'simens </td></tr>
+<tr><td> ei </td><td> ai </td><td> Einstein → 'ainctain </td></tr>
+<tr><td> eu </td><td> oi </td><td> Euler → 'oiler </td></tr>
+<tr><td> ä, ö, ü </td><td> ?, io, iu </td><td> München → 'miunhen <br> Köln → 'kioln </td></tr>
+<tr><td> j </td><td> i </td><td> Johann → 'iohan </td></tr>
+<tr><td> </td><td> </td><td> </td></tr>
+
+</table>
+
+<p>Common German words</p>
+<table>
+<tr>
+	<th> German </th>
+	<th> Nao </th>
+</tr>
+
+<tr><td> Berlin </td><td> 'berlin </td></tr>
+<tr><td> Leipzig </td><td> 'laiptsig </td></tr>
+<tr><td> Zürich </td><td> 'tsiurih </td></tr>
+<tr><td> Nürnberg </td><td> 'niurnberg </td></tr>
+<tr><td> Volkswagen </td><td> 'folksvagen </td></tr>
+<tr><td> Schwarzkopf </td><td> 'cvartskopf </td></tr>
+<tr><td> Hamburg </td><td> 'hamburg </td></tr>
+<tr><td> Friedrich Nietzsche </td><td> 'fridrih 'nitsce </td></tr>
+<tr><td> Johann Sebastian Bach </td><td> 'iohan 'sebastian 'bah </td></tr>
+<tr><td> Sigmund Freud </td><td> 'sigmund 'froid </td></tr>
+<tr><td> Werner Heisenberg </td><td> 'verner 'haisenberg </td></tr>
+<tr><td> Ludwig van Beethoven </td><td> 'ludvig 'fan-bethofen </td></tr>
+
+<tr><td>  </td><td>  </td></tr>
+
+</table>
+
+</div>
+
+
+
+<p> Below you can put any German word to see its Nao transliteration <br></p>
+
+<input id="transliteration_input">
+<button id="transliterate_button">Transliterate</button>
+<h2 id="output"></h2>
+
+
+<script>
+
+function transliterate_Polish_to_Nao(w) {
+	w = w.toLowerCase().replace(/([mns]){2}/,'$1');
+	let n = ("f v k c х ха хi хu хe хo  h z ts s aj oj i i iu io").split(' ');
+	let r = ("v w ck sch ch ha hi hu he ho h х tz z ß ei eu ie j ü ö").split(' ');
+	for (let i=0; i < r.length; i++) {
+		w = w.split(r[i]).join(n[i]);
+	}
+	w = w.replace(/s([pt])([aiueoäüö])/, 'c$1$2');
+
+	return "'"+w;
+}
+
+document.getElementById("transliterate_button").addEventListener("click", function(){
+	let w = document.getElementById("transliteration_input").value;
+	document.getElementById("output").innerText = w + " → " + transliterate_Polish_to_Nao(w);
+});
+</script>
+
+</body>
+</html>

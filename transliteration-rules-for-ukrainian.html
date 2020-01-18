@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>
+		Nao dictionary
+	</title>
+	<meta charset="utf-8">
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body style="text-align: center; margin-bottom: 100px">
+
+<div id="header"></div>
+<script src="js.cookie.js"></script>
+<script src="header.js"></script>
+<div class="main" style="margin-left: 5%; margin-right: 5%">
+
+<h1 class="e"> Transliteration rules for Ukrainian</h1>
+
+
+<p> Here are the non-obvious links between Ukrainian spelling and Nao transliteration:</p>
+<table>
+<tr>
+	<th style="width: 50px"> Ukrainian </th>
+	<th>　Nao　</th>
+	<th> Example </th>
+
+<tr><td> и </td><td> y </td><td> Сум<R>и</R> → 'sum<R>y</R> </td></tr>
+<tr><td> і,ї,й </td><td> i </td><td> Р<R>і</R>вне → 'r<R>i</R>vne </td></tr>
+<tr><td> я,ю</td><td> ia,iu </td><td> Вінниц<R>я</R> → 'vinnyts<R>ia</R> </td></tr>
+<tr><td> є </td><td> e </td><td> <R>Є</R>впаторія → '<R>e</R>vpatoriia </td></tr>
+<tr><td> ь, ' </td><td> − </td><td> Л<R>ь</R>вів → 'lviv </td></tr>
+<tr><td> х </td><td> h </td><td> <R>Х</R>ерсон → '<R>h</R>erson </td></tr>
+<tr><td> г, ґ </td><td> g </td><td> Черні<R>г</R>ів → 'tcerni<R>g</R>iv </td></tr>
+<tr><td> щ </td><td> ctc </td><td> <R>Щ</R>астя → '<R>ctc</R>astia </td></tr>
+
+
+<tr><td> </td><td>  </td><td>  </td></tr>
+
+</table>
+
+<p>Common Ukrainian words</p>
+<table>
+<tr>
+	<th> Ukrainian </th>
+	<th> Nao </th>
+	<th> English </th>
+</tr>
+
+
+
+<tr><td> Київ </td><td> 'kyiv </td><td> Kyiv </td></tr>
+<tr><td> Кривий Ріг </td><td> 'kryvyi-rig </td><td> Kryvyi Rih</td></tr>
+<tr><td> Одеса </td><td> 'odesa </td><td> Odesa </td></tr>
+<tr><td> Харків </td><td> 'harkiv </td><td> Kharkiv </td></tr>
+
+<tr><td>  </td><td>  </td><td> </td></tr>
+
+</table>
+
+</div>
+
+
+<p> Below you can put any Ukrainian word to see its Nao transliteration <br></p>
+
+<input id="transliteration_input">
+<button id="transliterate_button">Transliterate</button>
+<h2 id="output"></h2>
+
+
+<script>
+
+function transliterate_Ukrainian_to_Nao(w) {
+	w = w.toLowerCase();
+	let n = ("ia io iu ii ie ii a b v g d e j z y i i i k l m n o p r s t u f h c ctc  ts tc").split(' ');
+	let r = ("я ьо ю ьи ье ьi а б в г д е ж з и і ї й к л м н о п р с т у ф х ш щ ь ц ч").split(' ');
+	for (let i=0; i < r.length; i++) {
+		w = w.split(r[i]).join(n[i]);
+	}
+
+	return "'"+w;
+}
+
+document.getElementById("transliterate_button").addEventListener("click", function(){
+	let w = document.getElementById("transliteration_input").value;
+	document.getElementById("output").innerText = w + " → " + transliterate_Ukrainian_to_Nao(w);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>
+		Nao dictionary
+	</title>
+	<meta charset="utf-8">
+	<link href="style.css" rel="stylesheet" type="text/css">
+	<script src="jquery.min.js"></script>
+	<script src="comdic.js"></script>
+	<script src="js.cookie.js"></script>
+    <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+    <script src="header.js"></script>
+    <script src="colors.js"></script>
+    <script src="translation.js"></script>
+    <script src="definition_generation.js"></script>
+</head>
+
+<script>
+let temporary_dfc;
+
+const set_cookies_cb_always_pronounce = () => {
+    Cookies.set('cb_always_pronounce',document.getElementById('cb_always_pronounce').checked,{expires: 9999});
+};
+
+const set_cookies_cb_fast_mode = () => {
+    Cookies.set('cb_fast_mode',document.getElementById('cb_fast_mode').checked,{expires: 9999});
+};
+
+if (Cookies.get('max_len') === undefined) {
+    Cookies.set('max_len',3,{expires: 9999});
+}
+
+const set_difficulty = (i) => {
+    dfc = i;
+    Cookies.set('dfc',i,{expires: 9999});
+    $('#r'+i).prop('checked',true);
+};
+
+const correct_sound = new Audio("correct.mp3");
+correct_sound.controls = true;
+correct_sound.volume = 0.1;
+
+let pure_wts, wts_d, current_word;
+
+const clean_ab = () => {
+    ab.value = "";
+    ab.focus();
+};
+
+const add_score = () => {
+    let s = $("#scorediv");
+    let score = parseInt(s.html());
+    if (wts_d.length == 1 && temporary_dfc == 3)
+        temporary_dfc = 2;  
+
+    score += [1,3,4,6][temporary_dfc-1]*wts_d.length;
+    score = new String(score);
+    s.fadeOut(200);
+    setTimeout( () => {
+        s.html("000".slice(score.length)+score);
+        s.fadeIn(1000);
+    } , 200);
+};
+
+const gamehandleKeyPress = (e) => {
+	let key = e.keyCode || e.which;
+	
+	if (key==13) {
+        if (ab.disabled) {
+            generate_a_task();
+        }
+        else check_answer();
+    }
+	else if (key==27) {
+        generate_a_task();
+    }
+};
+
+Object.prototype.randomElement = function() { 
+    let keys = Object.keys(this);
+    let w = keys[ keys.length * Math.random() << 0];
+
+    return [w].concat(this[w]);
+};
+
+const generate_a_task = () => {
+    $("#incorrect").hide();
+    if (document.getElementById('cb_fast_mode').checked)
+        setTimeout( () => $("#correct").fadeOut() , 300);
+    else $("#correct").hide();
+
+    set_pure_wts();
+    generate_output_from_pure_wts(dfc);
+};
+
+const set_pure_wts = () => {
+    $('#answer_box').prop('disabled',false);
+    $('#the_right_answer').hide();
+
+    clean_ab();
+
+    let e = cur_dic().from_Nao.randomElement();
+    
+    wts_d = disassemble(e[0]);
+    
+    let max_len = document.getElementById("myRange").value;
+    if (max_len == 6) max_len = Infinity;
+
+    while (wts_d.length > max_len || max_len > 1 && wts_d.length == 1 && dfc == 1) {
+        e = cur_dic().from_Nao.randomElement();
+        
+        wts_d = disassemble(e[0]);
+    }
+   
+    let k = {nao: e[0], main_tr: e[1], other_tr: e[2]};
+    current_word = k.nao;
+
+    const r = document.getElementById('the_right_answer');
+    
+    pure_wts = k.nao;
+
+    r.innerHTML = print_main_tr(k) + print_other_tr(k)
+    + `<div style="color: grey; font-size: ${Math.round(size_coef*1.5)}px">${get_label('press Enter to continue')}</div>`;
+};
+
+const generate_output_from_pure_wts = (my_dfc) => {
+    temporary_dfc = my_dfc;
+    Cookies.set('dfc',dfc,{expires: 9999});
+    let r;
+    if (my_dfc == 3) {
+        r = pure_wts;
+    }
+    else if (my_dfc == 4) {
+        pronounce(wts_d);
+        r = `<div style="color: grey"><i>(${get_label('click to see hint')})</i></div>`;
+    }
+    else if (my_dfc == 2) {
+        r = wts_d.join(' ');
+    }
+    else if (my_dfc == 1) {
+        r = print_translation_by_elem_from_disassemble(wts_d,11);
+    }
+
+    if (document.getElementById('cb_always_pronounce').checked == true && my_dfc != 4 && my_dfc == dfc)
+        pronounce(wts_d);
+
+    document.getElementById("actual_word").innerHTML = r;
+};
+
+const check_answer = () => {
+    let fm = document.getElementById('cb_fast_mode').checked;
+    let hh = document.getElementById('answer_box').value.toLowerCase().trim();
+    
+    if (tr_to_Nao(hh).includes(current_word)) {
+        $("#correct").show();
+        add_score();
+        correct_sound.play();
+
+        if (fm) {
+            setTimeout( () => $("#correct").fadeOut() , 300);
+            generate_a_task();
+            return;
+        }
+    }
+    else {
+        $("#incorrect").show();
+        //if (fm) setTimeout( () => $("#incorrect").fadeOut() , 300);
+    }
+
+    if (dfc == 4) generate_output_from_pure_wts(dfc-1);
+
+    $('#the_right_answer').show();
+    if (document.activeElement) document.activeElement.blur();
+
+    $('#answer_box').prop('disabled',true);
+    console.log("Check!");
+};
+
+const disable_radio = () => {
+    $('#r1, #r2').prop('disabled',true);
+    if (dfc == 1 || dfc == 2) set_difficulty(3);    
+};
+
+const enable_radio = () => {
+    $('#r1, #r2').prop('disabled',false);
+};
+
+const slider_changed = () => {
+    let v = document.getElementById('myRange').value;
+    v == 1 ? disable_radio() : enable_radio();
+    Cookies.set('max_len',v,{expires: 9999});
+};
+
+</script>
+
+<body onkeydown="gamehandleKeyPress(event)" style="cursor: default;">
+
+<div id="header"></div>
+
+<script>
+document.body.innerHTML += `
+<div class="main" style="text-align: center; height: 1000px; font-size: 50px">
+    <div class="container" style="height: 100px">
+        ${get_label('Score')}:
+        <div id="scorediv">000</div>
+    </div>
+    <div class="container">
+        <div style="vertical-align: top; font-size: 30px">
+
+            <div class="slidecontainer">
+                    <p>${get_label('Max length')}</p>
+                    <div id="six_spans">
+                        <span style="padding-left: 3px">1</span>
+                        <span>2</span>
+                        <span>3</span>
+                        <span>4</span>
+                        <span>5</span>
+                        <span style="padding-right: 0px">∞</span>
+                    </div>
+                    <input type="range" min="1" max="6" class="slider" id="myRange" onchange="slider_changed()">
+            </div>
+
+            <div style="padding-top: 20px">
+                    ${get_label('Difficulty')}
+                <form id="form_dfc" style="text-align: left">
+                        <input type="radio" name="dif" id="r1">${get_label('With translated pieces')}<br>
+                        <input type="radio" name="dif" id="r2">${get_label('With spaces')} <br>
+                        <input type="radio" name="dif" id="r3">${get_label('Normal')}<br>
+                        <input type="radio" name="dif" id="r4">${get_label('Voice only')} <br>
+                </form>
+            </div>
+        </div>
+        <div style="padding-left: 20px">
+            <div id="word_to_solve" style="cursor: default" class="container">
+                <div id="actual_word"></div>
+                <img src="pronounce_icon.png" style="width: 50px; padding-left: 20px" onClick="pronounce(wts_d)">
+            </div>
+            <input type="text" id="answer_box" style="font-size: 40px">
+            <div id="correct" style="color: green;">✔</div>
+            <div id="incorrect" style="color: red;">✖</div>
+            <div id="the_right_answer" style="max-width: 450px" onClick="generate_a_task()"></div>
+        </div>
+
+        <div style="vertical-align: top; font-size: 30px; text-align: left">
+            <input id="cb_always_pronounce" type="checkbox">${get_label('Always pronounce words')}<br>
+            <input id="cb_fast_mode" type="checkbox">${get_label('Fast mode')}
+        </div>
+    </div>
+</div>`
+</script>
+
+<div id="footer"></div>
+
+</body>
+
+<script>
+    let dfc;
+    if (Cookies.get('dfc') === undefined)
+        set_difficulty(3)
+    else {
+        dfc = Cookies.get('dfc');
+        $('#r'+dfc).prop('checked',true);
+    }
+
+    if (Cookies.get('cb_always_pronounce') === undefined) set_cookies_cb_always_pronounce();
+    else document.getElementById('cb_always_pronounce').checked = (Cookies.get('cb_always_pronounce') == 'true');
+
+    if (Cookies.get('cb_fast_mode') === undefined) set_cookies_cb_fast_mode();
+    else document.getElementById('cb_fast_mode').checked = (Cookies.get('cb_fast_mode') == 'true');
+
+    document.getElementById("myRange").value = Cookies.get('max_len');
+    if (document.getElementById("myRange").value == 1) disable_radio();
+
+    const wts = document.getElementById('word_to_solve');
+
+    let ab = document.getElementById('answer_box');
+    clean_ab();
+    generate_a_task();
+
+    $("#actual_word").click( () => {
+        ab.focus();
+        if (temporary_dfc < 4 && wts_d.length == 1 || temporary_dfc == 1) return;
+
+        temporary_dfc--;
+        generate_output_from_pure_wts(temporary_dfc);
+    })
+
+    $('#form_dfc > input').change(  () => {
+        dfc = parseInt($('#form_dfc > input:checked').attr('id').slice(1));
+    });
+
+    $('#cb_always_pronounce').change(set_cookies_cb_always_pronounce);
+    $('#cb_fast_mode').change(set_cookies_cb_fast_mode);
+</script>
+
+<script src="footer.js"></script>
+
+</html>

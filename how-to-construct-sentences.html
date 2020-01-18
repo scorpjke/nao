@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>
+		Nao dictionary
+	</title>
+	<meta charset="utf-8">
+	<link href="style.css" rel="stylesheet" type="text/css">
+	<script src="js.cookie.js"></script>
+</head>
+<body onkeydown="handleKeyPress(event)">
+
+	<div id="header"></div>
+	<script src="header.js"></script>
+	<div class="main">
+
+	<h1 class="e"> Nao textbook: How to construct sentences</h1>
+
+	<div id="under_header" class="container" style="width: 100%">
+
+		<script src="textbook_buttons.js"></script>
+
+		<div style="vertical-align: top; width: 70%">
+
+			The sentence consists of <i>top-words</i>. Mostly they are marked by markers that come right before to inform about the function of the word in the sentence.<br>
+			<br>
+			Nao sentence can have the following top-words:<br>
+			<div style="padding: 20px 30px; line-height: 35px">
+				1. Top-verb (= predicate = main verb). Marked with <b class="g">ho</b> in case of non-standard word order.<br>
+				2. Top-nouns:<br>
+				<div style="padding-left: 20px"> 
+					a) Top-subject. Must come before the top-verb unless marked with <b class="g">gi</b>.<br>
+					b) Top-object. Must come after the top-verb unless marked with <b class="g">gu</b>.<br>
+					c) Nouns that follow <b>de</b> or [<b>po</b>+verb/preposition].<br>
+				</div>
+				3. Adjective (= top-noun modifier). Marked with <b class="g">ce</b> if not originally an adjective. Must follow the top-noun. <br>
+				4. Top-adverb (= top-verb modifier). Always marked with <b class="g">po</b>.<br>
+				5. Clause (= subsentence). Optionally marked by <b class="g">pe</b> or words <b>ca, kei/keu, sei/seu, hoi/hou</b>.
+			</div>
+			Any top-word (including subject, object, and even the main verb) can be omitted if the speaker wishes to do so, as long as the grammatical structure of the sentence remains clear.<br>
+			<br>
+
+			<i>Example 1:</i><br>
+			<div style="font-size: 40px; width: 400px; text-align: center; padding: 20px 0px">
+				— <span style="color: blue">miau</span>
+				<span style="color: red">gin</span>
+				<span style="color: green">lias</span> —
+				<br>
+				<span style="color: blue">Cat</span>
+				<span style="color: red">eats</span>
+				<span style="color: green">fish</span>.<br>
+			</div>
+       		At first we find the top verb. In this case it is <b class="g">gin</b> = eat/drink, and the tense is not specified. We don’t see any more markers in the sentence so the subject is on the left: <b class="g">miau</b> = cat, and the object is on the right: <b class="g">lias</b> = fish. The resulting meaning is “Cat eats fish”.<br>
+       		<br>
+			<i>Example 2:</i><br>
+
+			<div style="font-size: 40px; width: 80%; text-align: center; padding: 20px 0px">
+				— <span style="color: blue">megau</span>
+				<span style="color: purple">pojoi</span>
+				<span style="color: red">kigo pua kan</span>
+				<span style="color: green">latuadue</span>
+				<span style="color: orange">pun</span>
+				<span style="color: orange">ceniegau</span> —
+				<br>
+				<span style="color: blue">We</span>
+				<span style="color: purple">happily</span>
+				<span style="color: red">went to see</span>
+				<span style="color: orange">big</span>
+				<span style="color: orange">annual</span>
+				<span style="color: green">competition</span>.
+
+			</div>
+			<div style="line-height: 30px">
+				1. Find the top verb. It's <b>kigo pua kan</b> [PAST go for see/look] = went to see. As you can see, it consists of a few “words”, but in Nao it is all grammatically one top verb.<br>
+				2. Find the subject. It should be somewhere on the left of the main verb. At first we see <b>pojoi</b> [ADV happy] = happily, which is marked with <b>po</b> - the top-adverb marker. Let’s look more to the left and we see <b>megau</b> not marked with anything so it must be the subject.<br>
+				3. We see an unmarked noun coming after the main verb so it’s an object: <b>latuadue</b>.<br>
+				4. <b>pun</b>=big is an adjective by default, stand-alone word, so it is a top-adjective describing the top-noun right before it: <b>latuadue</b>.<br>  
+				5. <b>niegau</b> = every year, is a noun, but then it is marked by <b>ce</b> so it becomes a top-adjective describing the top-noun on the left.
+			</div>
+
+			<h2 class="e"> Other rules </h2>
+			1. Top-words must be divided by a space. A marker can be thought of as a part of the top-word and thus does not have to be separated from it by a space. <br>
+			2. Words [<b>din</b>=and, <b>dun</b>=or] can only connect top-words or sentences. If a word that follows <b>din/dun</b> is not marked, it is the same type of top-word as the one right before <b>din/dun</b>. To say "and" inside a compound, use <b>ko</b>.<br>
+		</div>
+	</div>
+
+</div>
+</body>
+</html>

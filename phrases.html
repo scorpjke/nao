@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>
+		Nao dictionary
+	</title>
+	<meta charset="utf-8">
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+	<div id="header"></div>
+	<script src="js.cookie.js"></script>
+	<script src="comdic.js"></script>
+	<script src="translation.js"></script>
+	<script src="header.js"></script>
+	
+	<div class="main">
+
+	<h1 class="e"> Nao textbook: phrases</h1>
+
+	<div id="under_header" class="container" style="width: 100%">
+
+		<script src="textbook_buttons.js"></script>
+
+		<div style="vertical-align: top;" id="phrases">
+		
+		Here are some example sentences and phrases that should give you a picture of how the language works. Keep in mind that all of them are just ordinary logically built sentences. Also note that by default the verb is tenseless, so most sentences here could possibly mean the past, the future, etc.
+
+		</div>
+	</div>
+
+	</div>
+
+</body>
+<script>
+	let tt = `happy-meet 邇 Hello!
+		me named 綱'jon邇 My name is John. 
+		you named what邇 What is your name? 
+		you feel-in_state what邇 How is your mood? 
+		good邇 Good. 
+		bad邇 Bad. 
+		happy-with-respect-do-good邇 Thank you. 
+		feel-bad do-bad邇 I'm sorry. 
+		not deserve邇 It's nothing (as a reply to an apology or a thank-you) 
+		true邇 True (normally translates as "yes") 
+		false邇 False (normally translates as "no") 
+		me understand邇 I understand. 
+		that dog me邇 That's my dog. 
+		that what邇 What is that? 
+		QUESTION that cat you邇 Is that your cat? 
+		QUESTION building 綱'jon high邇 Is John's house tall? 
+		綱'piter sit 邇 Peter is sitting. 
+		you not sit邇 You are not sitting. 
+		me like cat 邇 I like cats. 
+		you like what邇 What do you like? 
+		QUESTION cat like sleep邇 Do cats like to sleep? 
+		QUESTION 綱'jon dislike dog邇 Does John dislike dogs? 
+		綱'jeni go sleep邇 Jenny goes to sleep. 
+		綱'piter want sit邇 Peter wants to sit. 
+		also 綱'tom want sit邇 Tom, too, wants to sit. 
+		me FUTURE go 綱'madrid邇 I will go to Madrid. 
+		me PAST go 綱'istanbul邇 I went to Istanbul. 
+		ask go邇 Go!
+		ask not buy that邇 Don't buy that! 
+		male-that have four banana邇 He has four bananas 
+		綱'alis be_located 綱'london邇 Alice is in London 
+		QUESTION 綱'jon FUTURE meet 綱'alis be_located 綱'london邇 Will John meet Alice in London? 
+		綱'jeremi go 綱'hongkong for_the_sake buy what邇 Jeremy goes to Hong Kong to buy what? 
+		綱'jorj go sleep because not-have_energy邇 George goes to sleep because [he] is tired. 
+		綱'alis not go 綱'nu髭綱iork because dislike邇 Alice doesn't go to New York because [she] dislikes [it] 
+		because what you not PAST sleep邇 Why didn't you sleep?`;
+
+
+	document.getElementById('phrases').innerHTML += tt.split('\n').map(line => '<div><p> — ' + unmake_neutral(line.split('邇')[0]) + ' — </p><p>' + line.split('邇')[1]  + '</p></div>').join('');
+</script>
+</html>

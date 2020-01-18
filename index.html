@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>
+		Nao dictionary
+	</title>
+	<meta charset="utf-8">
+	<link href="style.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script src="comdic.js"></script>
+	<script src="js.cookie.js"></script>
+
+	<script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+</head>
+<body onkeydown="handleKeyPress(event)">
+
+<div id="header"></div>
+<script src="header.js"></script>
+
+<script>
+
+let currentWord;
+	
+const onHashChange = () => {
+	let word = get_hash('word-to-search');
+	for (let i=1; i < hash_settings.length; i++) {
+		
+	}
+
+	if (currentWord != word) {
+		currentWord = word;
+		$( document ).ready( () => {
+			document.getElementById("input_word1").value = word;
+			print_full_translation('demo');
+		});
+	}
+};
+onHashChange();
+
+$(window).on('hashchange', onHashChange);
+
+let sksk = Math.round(Math.pow($(window).width(),0.4)*1.5);
+document.body.innerHTML += `<div class="main">
+<h1 id="top_label" class="e" style="font-size: ${sksk*2}px">${get_label('Nao dictionary')}</h1>
+
+<div id="klmz" class="container">
+	<div class="my_column">
+		<div onClick="toggle_settings()" >
+				${get_label('Settings')}
+		</div>
+		<div  class="e" style="text-align: left; padding-left: 5% ; font-size: 20px">
+				${get_label('Language of the website')}
+			<select id="select_lang">
+					<option value="eng">English</option>
+					<option value="jap">日本語</option>
+					<option value="rus">Русский</option>
+			</select>
+			<br>
+			<input id="print_a_the" type="checkbox"> ${get_label('Print "a/the" before nouns in the definition')}
+			<br>
+			<input id="specify_the_part_of_speech" type="checkbox"> ${get_label('Specify the part of speech')}
+			<br>
+			<!-- <input id="whether_hide_background" type="checkbox" onChange="toggle_background()"> ${get_label('Hide the background picture')}<br> -->
+			<a href="combinations.html">${get_label('see the full list of words here')}</a>
+		</div>
+		
+	</div>
+
+	<div class="my_column" style="font-size: ${sksk/1.5}px">
+			${get_label('Enter Nao or English word:')}<br><br>
+		<input id="input_word1" type="text" value="" style="font-size: ${sksk}px" autocomplete="on">
+		<button onClick="clean_input()" style="font-size:${sksk}px; vertical-align: top">${get_label('Esc')}</button>
+		<br><br>
+		<button onClick="print_full_translation('demo')" style="font-size:${sksk}px">${get_label('Go!')}</button>
+
+	</div>
+
+	<div class="my_column">
+		
+	</div>
+</div>`;
+</script>
+
+<div id="demo" class="e"></div>
+<div id="elem_table" class="container" style="vertical-align: top;"></div>
+</div>
+
+<script src="translation.js"></script>
+<script src="nao5_stuff.js"></script>
+<script src="colors.js"></script>
+<script src="definition_generation.js"></script>
+
+<script>
+
+//document.getElementById("whether_hide_background").checked = Cookies.get('background_picture') == 'url("")' ? 1 : 0;
+dictionary_tab();
+
+$('.elt > div').click(clicked_element);
+
+document.getElementById('select_lang').value = cur_lang();
+
+</script>
+
+<div id="footer"></div>
+<script src="footer.js"></script>
+
+</body>
+</html>

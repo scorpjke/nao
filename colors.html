@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>
+		Nao dictionary
+	</title>
+	<meta charset="utf-8">
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+	<div id="header"></div>
+	<script src="js.cookie.js"></script>
+	<script src="colors.js"></script>
+	<script src="header.js"></script>
+	
+	<div class="main">
+
+	<h1 class="e"> Nao textbook: How to construct colors</h1>
+
+	<div id="under_header" class="container" style="width: 100%">
+
+		<script src="textbook_buttons.js"></script>
+
+		<div class="container" style="vertical-align: top;">
+
+				
+			<div id="colorwheel">
+				<div id="colorwheel_1"></div>
+				<div id="colorwheel_2"></div>
+				<div id="colorwheel_3"></div>
+			</div>
+
+			<div style="vertical-align: top;">
+				<p style="text-align: center; font-size: 40px; width: 600px">Luminosity</p>
+				<div id="lum" class="container"></div>
+				<br><br>
+				<p style="text-align: center; font-size: 40px; width: 600px">Saturation</p>
+				<div id="sat" class="container"></div>
+				<br><br>
+				<p style="text-align: center;">The resulting color:</p>
+				<div id="rescol">
+					<div id="res_n" style="text-align: center">
+					</div>
+					<div id="colorbox"></div>
+					<div style="text-align: center">
+						<span id="reshue"></span>
+						<span id="reslum"></span>
+						<span id="ressat"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+	<div style="text-align: center">
+		<h1>Game</h1>
+		<button onClick="grc_clicked()">Generate random color</button>
+		<div id="randomcolordiv"></div>
+		<button onClick="cn_clicked()">See the name</button>
+		<div id="colornamediv"></div>
+	</div>
+</div>
+
+<script>
+
+function grc_clicked() {
+	colornamediv.style.display = "none";
+	let c = random_color();
+	randomcolordiv.innerHTML = c.colorbox;
+	colornamediv.innerHTML = c.nao;
+}
+
+function cn_clicked() {
+	colornamediv.style.display = "block";
+}
+
+var picked_hue, picked_lum=50, picked_sat=80;
+
+document.getElementById('buttons33').style.marginRight = "0px";
+
+for (var i=0; i<360; i++) {
+			var color = document.createElement("span");
+			color.setAttribute("class", "c1");
+			color.style.backgroundColor = "hsl(" + (i+90) + ", 100%, 50%)";
+			color.style.webkitTransform = "rotate(" + i + "deg)";
+			document.getElementById('colorwheel_1').appendChild(color);
+}
+
+for (var i=0; i<360; i=i+6) {
+			var color = document.createElement("span");
+			color.setAttribute("class", "c2");
+			color.setAttribute("onClick", "hue_clicked(" + i + ")");
+			color.style.webkitTransform = "rotate(" + (i-90) + "deg)";
+			document.getElementById('colorwheel_2').appendChild(color);
+}
+
+for (var i=0; i<360; i=i+6) {
+	var n = document.createElement("div");
+	n.setAttribute("class", "c3");
+	n.innerHTML = i/6;
+	if (n.innerHTML.length == 1) n.innerHTML = '0'+n.innerHTML;
+	n.style.top = Math.round(655*0+370*Math.sin((i-90)/180*Math.PI)) + 'px';
+	n.style.left = Math.round(840*0+370*Math.cos((i-90)/180*Math.PI)) + 'px' ;
+	if (i/6 % 5 == 0) n.style.fontSize = '30px';
+	document.getElementById('colorwheel_3').appendChild(n);
+}
+
+function hue_clicked(h) {
+	var t = (h/6).toString();
+	if (h/6 < 10) t = '0'+t;
+	if (t.endsWith('0')) t = t[0];
+
+	document.getElementById('reshue').innerHTML = 'ha'+ t;
+	picked_hue = h;
+	gen_colorbox();
+
+	for (var i=0; i < 200; i++) {
+		var n = document.createElement("div");
+		n.setAttribute("class", "L1");
+		n.style.backgroundColor = "hsl(" + h + ", 100%,"+i/2+"%)";
+		n.style.left = i*3+'px';
+		document.getElementById('lum').appendChild(n);
+	}
+
+	for (var i=0; i < 19; i++) {
+		var n = document.createElement("span");
+		n.setAttribute("class", "L2");
+		n.setAttribute("onClick", "lum_clicked(" + (i-9) + ")");
+		n.style.left = 15+i*30+'px';
+		document.getElementById('lum').appendChild(n);
+	}
+
+	for (var i=0; i < 19; i++) {
+		var n = document.createElement("span");
+		n.setAttribute("class", "L3");
+		n.style.left = 15+i*30+'px';
+		n.innerHTML = i-9;
+		document.getElementById('lum').appendChild(n);
+	}
+
+//Saturation
+	for (var i=0; i < 200; i++) {
+		var n = document.createElement("div");
+		n.setAttribute("class", "L1");
+		n.style.backgroundColor = "hsl(" + h + ", "+i/2+"%, 50%)";
+		n.style.left = i*3+'px';
+		document.getElementById('sat').appendChild(n);
+	}
+
+	for (var i=0; i < 19; i++) {
+		var n = document.createElement("span");
+		n.setAttribute("class", "L2");
+		n.setAttribute("onClick", "sat_clicked(" + (i-9) + ")");
+		n.style.left = 15+i*30+'px';
+		document.getElementById('sat').appendChild(n);
+	}
+
+	for (var i=0; i < 19; i++) {
+		var n = document.createElement("span");
+		n.setAttribute("class", "L3");
+		n.style.left = 15+i*30+'px';
+		n.innerHTML = i-9;
+		document.getElementById('sat').appendChild(n);
+	}
+}
+
+
+function lum_clicked(x) {
+	document.getElementById('reslum').innerHTML = x < 0 ? 'lau'+ Math.abs(x) : 'lai'+x;
+	picked_lum = x*5+50;
+	gen_colorbox();
+}
+
+function sat_clicked(x) {
+	document.getElementById('ressat').innerHTML = x < 0 ? 'bil'+ Math.abs(x) : 'bul'+x;
+	picked_sat = x*5+50;
+	gen_colorbox();
+}
+
+function gen_colorbox() {
+	document.getElementById('colorbox').innerHTML = hsl_to_colorbox(hsl_string(picked_hue,picked_sat,picked_lum));
+
+	document.getElementById('res_n').innerHTML = replace_all_numbers_to_words(reshue.innerHTML + reslum.innerHTML + ressat.innerHTML);
+}
+
+function hsl_string(h,s,l) {
+	return `hsl(${h},${s}%,${l}%)`;
+}
+
+function nao_string(h, l, s) {
+	if (h < 10) h = "0" + h;
+	l = l < 0 ? 'lau'+Math.abs(l) : 'lai'+Math.abs(l);
+	s = s < 0 ? 'bil'+Math.abs(s) : 'bul'+Math.abs(s);
+
+	return `ha${h} ${l} ${s}`;
+}
+
+function random_color() {
+	let nao_hue = Math.floor(Math.random()*60);
+	let hsl_hue = nao_hue*6;
+
+	let nao_lum = Math.floor(Math.random()*18) - 9;
+	let hsl_lum = (nao_lum+10) * 5;
+
+	let nao_sat = Math.floor(Math.random()*18) - 9;
+	let hsl_sat = (nao_sat+10) * 5;
+
+	return {nao: replace_all_numbers_to_words(nao_string(nao_hue,nao_lum,nao_sat)),
+			colorbox: hsl_to_colorbox(hsl_string(hsl_hue,hsl_sat,hsl_lum))};
+}
+
+
+</script>
+</body>
+</html>

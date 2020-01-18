@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>
+		Textbook
+	</title>
+	<meta charset="utf-8">
+	<link href="style.css" rel="stylesheet" type="text/css">
+	<script src="js.cookie.js"></script>
+	<script src="comdic.js"></script>
+	<script src="translation.js"></script>
+</head>
+<body onkeydown="handleKeyPress(event)">
+
+
+	<div id="header"></div>
+	<script src="header.js"></script>
+	<div class="main">
+		<h1 id="storyname" class="e"> </h1>
+
+		<div id="under_header" style="padding-left: 20%; padding-right: 20%">
+		<div id="storytext"> </div>
+	</div>
+</body>
+<script>
+	let text =`綱'tom: happy-meet, 綱'linda
+綱'linda: happy-meet, 綱'tom
+綱'tom: ask-cause-me-know: person-that what?
+綱'linda: person what?
+綱'tom: male high, ADJECTIVE-hair-light, in_state-live-short that
+綱'linda: male what?
+綱'tom: person-that sit be_located-angle
+綱'linda: understand: EMPHASIS that!
+綱'tom: true, that
+綱'linda: me not know − me not know QUESTION male-that person-what − person-begin-know-with-understand in_state-exist-short, ADVERB-able-true-quantity-big
+綱'tom: male-that GIANT-with-person-none
+綱'linda: false, ask-concentrated-see/look : female PASSIVE-like-see/look go-male-that −
+綱'tom: not PASSIVE-like-see/look − in_state-live-short, ADVERB-able-true, but not PASSIVE-like-see/look − only-you PASSIVE-like-see/look, 綱'linda.
+綱'linda: 綱'tom, PASSIVE-feel-important! what PASSIVE-do to you? ADVERB-able-true, you work too_much quantity-big, and...
+綱'tom: none-extraordinary PASSIVE-do to me − and me not work too_much quantity-big − ADVERB-true, me work quantity-small NOW − object-do-QUESTION ADJECTIVE-true: what PASSIVE-do to you, 綱'linda? only-you PASSIVE-like-see/look ADVERB-true −
+綱'linda: but, but...
+綱'tom: object-completely-not-deserve-PASSIVE-convinced-false − only-you PASSIVE-like-see/look, 綱'linda − me-speak-with-convinced − ask-go-with-me!
+綱'linda: but...
+綱'tom: ask-go to tool-see/look-self big − ask-concentrated-see/look − that 綱'linda, female completely-more PASSIVE-like-see/look be_located whole group-all −
+綱'linda: and that 綱'tom, male completely-less prone-convinced-important-and_as_a_result-not-find_funny be_located whole place-begin-know-with-understand-work −`;
+
+	document.getElementById('storyname').innerHTML = unmake_neutral(`綱'linda and 綱'tom`);
+	document.getElementById('storytext').innerHTML = unmake_neutral(text).replace(/\n/g,'<br>');
+</script>
+</html>
